@@ -1,4 +1,8 @@
 defmodule Data.Project do
+  @moduledoc """
+  The schema representation of our `projects` table
+  """
+
   use Ecto.Schema
 
   import Ecto.Changeset

@@ -1,4 +1,7 @@
 defmodule Data.Opportunity do
+  @moduledoc """
+  The schema representation of our `opportunities` table
+  """
   use Ecto.Schema
 
   import Ecto.Changeset
