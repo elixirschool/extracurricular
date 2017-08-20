@@ -13,7 +13,6 @@ defmodule Web.Mixfile do
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
-      aliases: aliases(),
       deps: deps()
     ]
   end
@@ -37,6 +36,7 @@ defmodule Web.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:data, in_umbrella: true},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
@@ -45,13 +45,5 @@ defmodule Web.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"}
     ]
-  end
-
-  # Aliases are shortcuts or tasks specific to the current project.
-  # For example, we extend the test task to create and migrate the database.
-  #
-  # See the documentation for `Mix` for more info on aliases.
-  defp aliases do
-    ["test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end
