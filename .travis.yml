@@ -1,0 +1,12 @@
+language: elixir
+sudo: false
+elixir:
+  - 1.5
+otp_release:
+  - 20.0
+notifications:
+  email: false
+script:
+  - mix compile --warnings-as-errors
+  - mix credo
+  - mix test
