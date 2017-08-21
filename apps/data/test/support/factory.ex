@@ -15,7 +15,7 @@ defmodule Data.Factory do
     %Opportunity{
       level: "starter",
       title: "Example Opportunity",
-      url: sequence(&"https://example.com/tracker/#{&1}"),
+      url: sequence("https://example.com/tracker/"),
       project: build(:project)
     }
   end
