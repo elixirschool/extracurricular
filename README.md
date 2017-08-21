@@ -1,11 +1,11 @@
-# Elixir Opportunities [![Build Status][travis-img]][travis] [![License][license-img]][license]
+# Extracurricular [![Build Status][travis-img]][travis] [![License][license-img]][license]
 
 [travis-img]: https://travis-ci.org/elixirschool/extracurricular.svg?branch=master
 [travis]: https://travis-ci.org/elixirschool/extracurricular
 [license-img]: http://img.shields.io/badge/license-MIT-brightgreen.svg
 [license]: http://opensource.org/licenses/MIT
 
-Elixir Opportunities is a website and twitter bot intended to increase visibility to open source opportunities within the community.
+Elixir School's Extracurricular is a website and twitter bot intended to increase visibility to open source opportunities within the community.
 
 ## Getting Involved
 
