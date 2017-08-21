@@ -1,0 +1,56 @@
+@charset "utf-8";
+@import 'bourbon/bourbon';
+@import 'base/base';
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700');
+@mixin font-smoothing($value: on) {
+    @if $value == on {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    @else {
+        -webkit-font-smoothing: subpixel-antialiased;
+        -moz-osx-font-smoothing: auto;
+    }
+}
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+body{
+  font-family: 'Roboto Slab', serif;
+  margin: 0 $base-spacing;
+  padding: 0;
+  @include font-smoothing(on);
+
+}
+
+.container{
+  height: 100%;
+  display: table;
+  margin: 0 auto;
+}
+
+#title{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+  padding-right: $base-spacing;
+  width: 500px;
+  h1{
+    font-size: 3em;
+    font-weight: 300;
+    padding: 0px;
+    margin: 0px;
+    color: #000;
+  }
+}
+
+#intro{
+  display: table-cell;
+  vertical-align: middle;
+  p{
+
+    padding-top: $base-spacing;
+  }
+}
