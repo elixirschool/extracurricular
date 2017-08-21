@@ -11,7 +11,7 @@ defmodule Data.Opportunity do
   @acceptable_levels Application.get_env(:data, :levels)
 
   schema "opportunities" do
-    field :completed_at, :utc_datetime # when it was closed/completed
+    field :closed_at, :utc_datetime # when it was closed/completed
     field :level, :string # starter, intermediate, advanced
     field :title, :string
     field :url, :string
@@ -23,7 +23,7 @@ defmodule Data.Opportunity do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:completed_at, :level, :project_id, :title, :url])
+    |> cast(params, [:closed_at, :level, :project_id, :title, :url])
     |> validate_required([:title, :url])
     |> validate_level_inclusion
     |> assoc_constraint(:project)

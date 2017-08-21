@@ -2,6 +2,6 @@ use Mix.Config
 
 config :data,
   ecto_repos: [Data.Repo],
-  levels: ["beginner", "starter", "intermediate", "advanced"]
+  levels: ["beginner", "intermediate", "advanced"]
 
 import_config "#{Mix.env}.exs"
