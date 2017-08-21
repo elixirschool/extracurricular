@@ -19,7 +19,6 @@ body {
 }
 body{
   font-family: 'Roboto Slab', serif;
-
   margin: 0 $base-spacing;
   padding: 0;
   @include font-smoothing(on);
@@ -29,6 +28,7 @@ body{
 .container{
   height: 100%;
   display: table;
+  margin: 0 auto;
 }
 
 #title{
@@ -36,12 +36,13 @@ body{
   vertical-align: middle;
   text-align: right;
   padding-right: $base-spacing;
-  width: 550px;
+  width: 500px;
   h1{
     font-size: 3em;
     font-weight: 300;
     padding: 0px;
     margin: 0px;
+    color: #000;
   }
 }
 

@@ -7,14 +7,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Elixir Opportunities</title>
+    <title>Extracurricular</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
     <div class="container">
     <header id="title">
-      <h1>Elixir Opportunities</h1>
+      <h1>Extracurricular</h1>
     </header>
 
     <%= render @view_module, @view_template, assigns %>
