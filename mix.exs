@@ -1,4 +1,4 @@
-defmodule ElixirOpportunities.Mixfile do
+defmodule Extracurricular.Mixfile do
   use Mix.Project
 
   def project do

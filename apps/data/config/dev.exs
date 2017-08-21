@@ -5,6 +5,6 @@ config :data, Data.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "data_dev",
+  database: "extracurricular_dev",
   hostname: "localhost",
   pool_size: 10
