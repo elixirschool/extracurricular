@@ -1,0 +1,6 @@
+<%= for results <- @results do %>
+  <div>
+    <h2><%= results.title %></h2>
+    <p><%= results.url %></p>
+  </div>
+<% end %>

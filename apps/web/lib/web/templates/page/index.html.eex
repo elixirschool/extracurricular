@@ -1,3 +1,8 @@
-<section id="intro">
-  <p>A website and twitter bot intended to increase visibility to open source opportunities within the Elixir community.</p>
-</section>
+<div id="splash">
+  <header>
+    <h1>Extracurricular</h1>
+  </header>
+  <section>
+    <p>A website and twitter bot intended to increase visibility to open source opportunities within the Elixir community.</p>
+  </section>
+</div>

@@ -22,35 +22,30 @@ body{
   margin: 0 $base-spacing;
   padding: 0;
   @include font-smoothing(on);
-
 }
-
-.container{
+#splash{
   height: 100%;
   display: table;
   margin: 0 auto;
-}
-
-#title{
-  display: table-cell;
-  vertical-align: middle;
-  text-align: right;
-  padding-right: $base-spacing;
-  width: 500px;
-  h1{
-    font-size: 3em;
-    font-weight: 300;
-    padding: 0px;
-    margin: 0px;
-    color: #000;
+  header{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+    padding-right: $base-spacing;
+    width: 500px;
+    h1{
+      font-size: 3em;
+      font-weight: 300;
+      padding: 0px;
+      margin: 0px;
+      color: #000;
+    }
   }
-}
-
-#intro{
-  display: table-cell;
-  vertical-align: middle;
-  p{
-
-    padding-top: $base-spacing;
+  section{
+    display: table-cell;
+    vertical-align: middle;
+    p{
+      padding-top: $base-spacing;
+    }
   }
 }
