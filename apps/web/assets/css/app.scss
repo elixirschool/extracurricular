@@ -1,6 +1,7 @@
 @charset "utf-8";
 @import 'bourbon/bourbon';
 @import 'base/base';
+@import 'neat/neat';
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700');
 @mixin font-smoothing($value: on) {
     @if $value == on {
@@ -12,6 +13,12 @@
         -moz-osx-font-smoothing: auto;
     }
 }
+$small-font-size: 0.75em;
+$badges: (
+  "starter": #e6efc2,
+  "advanced": #fbe3e4,
+  "intermediate": #fff6bf,
+) !default;
 html,
 body {
     width: 100%;
@@ -23,6 +30,37 @@ body{
   padding: 0;
   @include font-smoothing(on);
 }
+@each $badge-type, $color in $badges {
+  .badge-#{$badge-type} {
+    background-color: $color;
+    border-radius: $small-font-size * 5;
+    color: darken($color, 60%);
+    display: inline-block;
+    font-size: $small-font-size;
+    line-height: 1;
+    padding: 0.4em 1.2em;
+  }
+}
+.container {
+  margin: 0 auto;
+
+  width: 900px;
+}
+.result{
+  @include grid-container;
+
+  h2{
+
+    @include grid-column(5);
+  }
+  .meta{
+
+    @include grid-column(7);
+
+  }
+}
+
+
 #splash{
   height: 100%;
   display: table;

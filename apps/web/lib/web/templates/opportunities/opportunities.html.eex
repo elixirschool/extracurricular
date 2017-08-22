@@ -1,6 +1,13 @@
+<div class="container">
+  <h1>Extracurricular</h1>
+</div>
+<div class="container">
 <%= for results <- @results do %>
-  <div>
-    <h2><%= results.title %></h2>
-    <p><%= results.url %></p>
+  <div class="result">
+    <h2><%= link results.title, to: results.url %></h2>
+    <div class="meta">
+      <span class="badge-<%= results.level %>"><%= results.level %></span><br>
+    </div>
   </div>
 <% end %>
+</div>
