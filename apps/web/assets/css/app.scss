@@ -13,6 +13,8 @@
         -moz-osx-font-smoothing: auto;
     }
 }
+
+
 $small-font-size: 0.75em;
 $badges: (
   "starter": #e6efc2,
@@ -43,6 +45,11 @@ body{
     padding: 0.4em 1.2em;
   }
 }
+#wrapper{
+  min-height: 100%;
+  position: relative;
+}
+
 .container {
   margin: 0 auto;
   width: 900px;
@@ -51,23 +58,25 @@ body{
   font-size: 2em;
   font-weight: 100;
   color: #000;
-  margin-bottom: $base-spacing * 2;
+  margin: 0px;
+  padding-top: $base-spacing;
+  margin-bottom: $base-spacing;
+
 }
 .result{
-  @include grid-container;
-  border-bottom: 1px solid #ddd;
+  @include outer-container;
   padding: 0px;
   margin: 0px;
   padding-bottom: $base-spacing;
   margin-bottom: $base-spacing;
 
   h3{
-    @include grid-column(5);
+    @include span-columns(5);
     font-weight: 400;
     font-size: 1.1em;
   }
   .meta{
-    @include grid-column(7);
+    @include span-columns(7);
     .top{
       text-align: right;
       padding-bottom: $base-spacing / 2;
@@ -77,11 +86,104 @@ body{
     }
   }
 }
+
 .result:last-child{
   border: 0px;
   padding: 0px;
   margin: 0px;
 }
+
+footer {
+
+  $footer-background: desaturate(darken($action-color, 20%), 30%);
+  $footer-color: white;
+  $footer-link-color: transparentize($footer-color, 0.6);
+  $footer-disclaimer-color: transparentize($footer-color, 0.6);
+
+  background: $footer-background;
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: $base-spacing;
+  width: 100%;
+
+  ul {
+    line-height: 1.5em;
+    margin: 0 0 1em 0;
+    padding: 0;
+
+    @include media($large-screen) {
+      float: left;
+      line-height: 1.8em;
+      margin-bottom: 0;
+      margin-left: 1em;
+    }
+  }
+
+  ul li {
+    list-style: none;
+    padding-right: 1em;
+    color: $footer-link-color;
+    @include media($large-screen) {
+      display: inline;
+      text-align: left;
+    }
+  }
+
+  ul li a {
+    color: $footer-link-color;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+      color: transparentize($footer-color, 0);
+    }
+  }
+
+  .footer-secondary-links {
+    @include media($large-screen) {
+      float: right;
+    }
+
+    li {
+      font-size: 0.8em;
+    }
+
+    ul.footer-social {
+      margin: 1em 0 0 0;
+
+      @include media($large-screen) {
+        float: right;
+        margin-top: 0;
+      }
+
+      li {
+        float: left;
+        font-size: 1em;
+        line-height: 0;
+        margin: 0;
+        padding-right: 0.7em;
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+
+      img {
+        height: 1.6em;
+        opacity: 0.7;
+        padding: 1px;
+
+        &:focus,
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
 #splash{
   height: 100%;
   display: table;
