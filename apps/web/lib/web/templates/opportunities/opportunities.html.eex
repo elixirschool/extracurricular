@@ -9,7 +9,7 @@
       <h1 class="title">Extracurricular</h1>
     </div>
   </header>
-  <div class="container">
+  <main class="container">
   <%= for results <- @results do %>
     <div class="result">
       <h3><%= link results.title, to: results.url %></h3>
@@ -23,7 +23,7 @@
       </div>
     </div>
   <% end %>
-  </div>
+  </main>
   <footer>
     <ul>
       <li><a href="/">Home</a></li>
