@@ -11,9 +11,9 @@ defmodule Data.Opportunities do
   def all(opts \\ %{}) do
     opts = Map.merge(@defaults, opts)
 
-    Opportunity 
-    |> Ecto.Query.order_by(^opts.sort_by) 
-    |> Repo.paginate(page_size: opts.page_size)    
+    Opportunity
+    |> Ecto.Query.order_by(^opts.sort_by)
+    |> Repo.paginate(page_size: opts.page_size)
   end
 
   def get(params), do: Repo.get_by(Opportunity, params)

@@ -7,5 +7,4 @@ defmodule Web.OpportunitiesController do
     results = Opportunities.all()
     render(conn, "opportunities.html", results: results)
   end
-
 end

@@ -18,6 +18,7 @@ $badges: (
   "starter": #e6efc2,
   "advanced": #fbe3e4,
   "intermediate": #fff6bf,
+  "tag": #eee,
 ) !default;
 html,
 body {
@@ -36,6 +37,7 @@ body{
     border-radius: $small-font-size * 5;
     color: darken($color, 60%);
     display: inline-block;
+    font-family: sans-serif;
     font-size: $small-font-size;
     line-height: 1;
     padding: 0.4em 1.2em;
@@ -43,24 +45,43 @@ body{
 }
 .container {
   margin: 0 auto;
-
   width: 900px;
+}
+.title {
+  font-size: 2em;
+  font-weight: 100;
+  color: #000;
+  margin-bottom: $base-spacing * 2;
 }
 .result{
   @include grid-container;
+  border-bottom: 1px solid #ddd;
+  padding: 0px;
+  margin: 0px;
+  padding-bottom: $base-spacing;
+  margin-bottom: $base-spacing;
 
-  h2{
-
+  h3{
     @include grid-column(5);
+    font-weight: 400;
+    font-size: 1.1em;
   }
   .meta{
-
     @include grid-column(7);
-
+    .top{
+      text-align: right;
+      padding-bottom: $base-spacing / 2;
+    }
+    .bottom{
+      text-align: right;
+    }
   }
 }
-
-
+.result:last-child{
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+}
 #splash{
   height: 100%;
   display: table;
@@ -71,13 +92,13 @@ body{
     text-align: right;
     padding-right: $base-spacing;
     width: 500px;
-    h1{
-      font-size: 3em;
-      font-weight: 300;
-      padding: 0px;
-      margin: 0px;
-      color: #000;
-    }
+  }
+  h1{
+    font-size: 3em;
+    font-weight: 300;
+    padding: 0px;
+    margin: 0px;
+    color: #000;
   }
   section{
     display: table-cell;
@@ -86,4 +107,16 @@ body{
       padding-top: $base-spacing;
     }
   }
+}
+.icon > svg {
+  display: inline-block;
+  margin: 0px 5px 0px 0px;
+}
+svg{
+  vertical-align: middle;
+}
+.icon {
+    width: 1em;
+    height: 1em;
+    fill: #000;
 }

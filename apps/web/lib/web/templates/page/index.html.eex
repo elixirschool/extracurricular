@@ -3,6 +3,6 @@
     <h1>Extracurricular</h1>
   </header>
   <section>
-    <p>A website and twitter bot intended to increase visibility to open source opportunities within the Elixir community.</p>
+    <p>A <b><%= link "website", to: "/list" %></b> and twitter bot intended to increase visibility to open source opportunities within the Elixir community.</p>
   </section>
 </div>
