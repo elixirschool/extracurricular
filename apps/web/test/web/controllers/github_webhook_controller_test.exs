@@ -41,6 +41,6 @@ defmodule Web.GitHubWebhookControllerTest do
     json_response(conn, 201)
 
     opportunities = Opportunities.all()
-    assert length(opportunities) == 1
+    assert length(opportunities.entries) == 1
   end
 end

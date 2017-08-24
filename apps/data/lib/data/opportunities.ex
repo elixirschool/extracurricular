@@ -5,7 +5,8 @@ defmodule Data.Opportunities do
 
   alias Data.{Opportunity, Repo}
 
-  def all, do: Repo.all(Opportunity)
+  def all(opts \\ [page_size: 25])
+  def all([page_size: page_size]), do: Repo.paginate(Opportunity, page_size: page_size)
 
   def get(params), do: Repo.get_by(Opportunity, params)
 

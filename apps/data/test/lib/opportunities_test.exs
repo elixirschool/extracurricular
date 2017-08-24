@@ -32,4 +32,14 @@ defmodule Data.OpportunitiesTest do
     new_url = "https://example.com/new"
     assert {:ok, %{id: _id, url: ^new_url}} = Opportunities.update(opportunity, %{url: new_url})
   end
+
+  test "can get all opportunities, paginated" do
+    Enum.each((1..2), fn(_) -> insert(:opportunity) end)
+    result = Opportunities.all
+
+    assert result.page_number == 1
+    assert result.page_size == 25
+    assert result.total_pages == 1
+    assert result.total_entries == 2
+  end
 end

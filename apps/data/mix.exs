@@ -23,7 +23,12 @@ defmodule Data.Mixfile do
   def application do
     [
       mod: {Data.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [
+                           :logger,
+                           :runtime_tools,
+                           :scrivener,
+                           :scrivener_ecto,
+                          ]
     ]
   end
 
@@ -39,8 +44,10 @@ defmodule Data.Mixfile do
       {:appsignal, "~> 1.3"},
       {:postgrex, ">= 0.0.0"},
       {:ecto, "~> 2.1"},
+      {:scrivener, "~> 2.0"},
+      {:scrivener_ecto, "~> 1.0"},
 
-      {:ex_machina, "~> 2.0", only: [:dev, :test]}
+      {:ex_machina, "~> 2.0", only: [:dev, :test]},
     ]
   end
 
