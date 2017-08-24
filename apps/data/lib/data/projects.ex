@@ -5,7 +5,8 @@ defmodule Data.Projects do
 
   alias Data.{Project, Repo}
 
-  def all, do: Repo.all(Project)
+  def all(opts \\ [page_size: 25])
+  def all([page_size: page_size]), do: Repo.paginate(Project, page_size: page_size)
 
   def get(params), do: Repo.get_by(Project, params)
 

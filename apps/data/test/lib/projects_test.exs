@@ -30,4 +30,14 @@ defmodule Data.ProjectsTest do
     new_url = "https://example.com/new"
     assert {:ok, %{id: _id, url: ^new_url}} = Projects.update(project, %{url: new_url})
   end
+
+  test "can get all projects, paginated" do
+    Enum.each((1..2), fn(_) -> insert(:project) end)
+    result = Projects.all
+
+    assert result.page_number == 1
+    assert result.page_size == 25
+    assert result.total_pages == 1
+    assert result.total_entries == 2
+  end
 end

@@ -8,3 +8,5 @@ config :data, Data.Repo,
   database: "extracurricular_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :logger, level: :warn
