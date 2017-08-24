@@ -5,12 +5,11 @@ defmodule Web.GitHubWebhookController do
   use Web, :controller
 
   alias Data.{Opportunities, Projects}
-  alias Web.TaskSupervisor
 
   def create(conn, %{"action" => action, "issue" => issue} = issue_event)
     when is_map(issue) and action in ["closed", "labeled", "opened", "reopened"] do
 
-    Task.Supervisor.start_child(TaskSupervisor, __MODULE__, :process_issue, [issue_event])
+    process_issue(issue_event)
 
     thank_you(conn)
   end
