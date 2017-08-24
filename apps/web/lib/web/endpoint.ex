@@ -1,5 +1,6 @@
 defmodule Web.Endpoint do
   use Phoenix.Endpoint, otp_app: :web
+  use Appsignal.Phoenix
 
   socket "/socket", Web.UserSocket
 
