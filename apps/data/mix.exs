@@ -47,7 +47,7 @@ defmodule Data.Mixfile do
       {:scrivener, "~> 2.0"},
       {:scrivener_ecto, "~> 1.0"},
 
-      {:ex_machina, "~> 2.0", only: [:dev, :test]},
+      {:ex_machina, github: "rbeene/ex_machina", only: [:dev, :test]},
     ]
   end
 
