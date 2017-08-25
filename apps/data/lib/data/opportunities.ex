@@ -5,8 +5,12 @@ defmodule Data.Opportunities do
 
   alias Data.{Opportunity, Repo}
 
-  def all(opts \\ [page_size: 25])
-  def all([page_size: page_size]), do: Repo.paginate(Opportunity, page_size: page_size)
+  @defaults %{page_size: 25}
+
+  def all(opts \\ %{}) do
+    opts = Map.merge(@defaults, opts)
+    Repo.paginate(Opportunity, page_size: opts.page_size)
+  end
 
   def get(params), do: Repo.get_by(Opportunity, params)
 

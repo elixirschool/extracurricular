@@ -8,7 +8,6 @@ use Mix.Config
 # General application configuration
 config :web,
   namespace: Web,
-  ecto_repos: [Web.Repo],
   level_label_mapping: %{
     "beginner" => ["Kind:Beginner", "Kind:Starter", "level:starter"],
     "intermediate" => ["Kind:Intermediate", "level:intermediate"],
