@@ -1,6 +1,6 @@
 defmodule Data.Repo do
   use Ecto.Repo, otp_app: :data
-  use Scrivener, page_size: 25
+  use Scrivener
 
   @doc """
   Dynamically loads the repository url from the
