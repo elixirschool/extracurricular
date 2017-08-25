@@ -4,12 +4,16 @@ defmodule Data.Opportunities do
   """
 
   alias Data.{Opportunity, Repo}
+  require Ecto.Query
 
-  @defaults %{page_size: 25}
+  @defaults %{sort_by: :inserted_at, page_size: 25}
 
   def all(opts \\ %{}) do
     opts = Map.merge(@defaults, opts)
-    Repo.paginate(Opportunity, page_size: opts.page_size)
+
+    Opportunity 
+    |> Ecto.Query.order_by(^opts.sort_by) 
+    |> Repo.paginate(page_size: opts.page_size)    
   end
 
   def get(params), do: Repo.get_by(Opportunity, params)

@@ -21,6 +21,15 @@ defmodule Data.OpportunitiesTest do
     assert %{id: _id} = Opportunities.get(%{url: url})
   end
 
+  test "sort opportunities" do 
+    insert(:opportunity, title: "B Example")
+    insert(:opportunity, title: "C Example")
+    insert(:opportunity, title: "A Example")
+    %{entries: opportunities} = Opportunities.all(%{sort_by: :title}) 
+
+    assert [%{title: "A Example"}, %{title: "B Example"}, %{title: "C Example"}] = opportunities
+  end
+
   test "updates opportunity by id" do
     %{id: id} = insert(:opportunity)
     new_url = "https://example.com/new"
