@@ -3,7 +3,7 @@ defmodule Web.OpportunitiesControllerTest do
 
   alias Data.{Opportunities, Projects}
 
-  test "GET /list", %{conn: conn} do
+  test "GET /opportunities", %{conn: conn} do
     {:ok, %{id: project_id}} = Projects.insert(%{name: "Example Project", url: "example.com"})
 
     attributes = %{
@@ -12,10 +12,11 @@ defmodule Web.OpportunitiesControllerTest do
       title: "Example Opportunity",
       url: "https://example.com/tracker/1"
     }
+
     Opportunities.insert(attributes)
     Opportunities.insert(%{attributes | title: "Another Opportunity"})
 
-    conn = get conn, "/list"
+    conn = get conn, "/opportunities"
     assert html_response(conn, 200) =~ "Example Opportunity"
     assert html_response(conn, 200) =~ "Another Opportunity"
   end

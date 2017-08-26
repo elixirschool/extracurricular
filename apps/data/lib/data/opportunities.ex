@@ -6,14 +6,15 @@ defmodule Data.Opportunities do
   alias Data.{Opportunity, Repo}
   require Ecto.Query
 
-  @defaults %{sort_by: :inserted_at, page_size: 25}
+  @defaults %{include: [], sort_by: :inserted_at, page: 1, page_size: 25}
 
   def all(opts \\ %{}) do
     opts = Map.merge(@defaults, opts)
 
     Opportunity
     |> Ecto.Query.order_by(^opts.sort_by)
-    |> Repo.paginate(page_size: opts.page_size)
+    |> Repo.paginate(page: opts.page, page_size: opts.page_size)
+    |> include(opts.include)
   end
 
   def get(params), do: Repo.get_by(Opportunity, params)
@@ -41,5 +42,11 @@ defmodule Data.Opportunities do
     struct
     |> Opportunity.changeset(params)
     |> Repo.update
+  end
+
+  defp include(results, nil), do: results
+  defp include(%{entries: entries} = results, schemas) do
+    preloaded = Repo.preload(entries, schemas)
+    Map.put(results, :entries, preloaded)
   end
 end
