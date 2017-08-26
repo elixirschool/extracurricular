@@ -7,7 +7,7 @@ defmodule Data.Factory do
     %Project{
       name: "Example Project",
       tags: ["authentication", "web"],
-      url: "https://example.com"
+      url: sequence("https://example.com")
     }
   end
 

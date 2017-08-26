@@ -14,6 +14,11 @@ defmodule Data.ProjectsTest do
     assert {:ok, %{id: _id}} = Projects.insert(attributes)
   end
 
+  test "duplicate project urls are invalid" do
+    insert(:project, url: "https://example.com")
+    assert {:error, _changeset} = Projects.insert(%{url: "http://example.com"})
+  end
+
   test "gets project by attributes" do
     %{url: url} = insert(:project)
     assert %{id: _id} = Projects.get(%{url: url})

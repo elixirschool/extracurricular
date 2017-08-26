@@ -19,5 +19,6 @@ defmodule Data.Project do
     struct
     |> cast(params, [:name, :tags, :url])
     |> validate_required([:name, :url])
+    |> unique_constraint(:url, message: "A project with this URL already exists", name: "project_url_index")
   end
 end
