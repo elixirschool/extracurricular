@@ -5,6 +5,7 @@ defmodule Data.Factory do
 
   def project_factory do
     %Project{
+      api_token: sequence("api_token"),
       name: "Example Project",
       tags: ["authentication", "web"],
       url: sequence("https://example.com")
