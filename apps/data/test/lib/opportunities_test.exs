@@ -21,7 +21,7 @@ defmodule Data.OpportunitiesTest do
     assert %{id: _id} = Opportunities.get(%{url: url})
   end
 
-  test "sort opportunities" do 
+  test "sort opportunities" do
     insert(:opportunity, title: "B Example")
     insert(:opportunity, title: "C Example")
     insert(:opportunity, title: "A Example")

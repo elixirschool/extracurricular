@@ -1,6 +1,7 @@
 @charset "utf-8";
 @import 'bourbon/bourbon';
 @import 'base/base';
+@import 'neat/neat';
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700');
 @mixin font-smoothing($value: on) {
     @if $value == on {
@@ -12,6 +13,15 @@
         -moz-osx-font-smoothing: auto;
     }
 }
+
+
+$small-font-size: 0.75em;
+$badges: (
+  "starter": #e6efc2,
+  "advanced": #fbe3e4,
+  "intermediate": #fff6bf,
+  "tag": #eee,
+) !default;
 html,
 body {
     width: 100%;
@@ -22,35 +32,217 @@ body{
   margin: 0 $base-spacing;
   padding: 0;
   @include font-smoothing(on);
-
 }
-
-.container{
-  height: 100%;
-  display: table;
+@each $badge-type, $color in $badges {
+  .badge-#{$badge-type} {
+    background-color: $color;
+    border-radius: $small-font-size * 5;
+    color: darken($color, 60%);
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: $small-font-size;
+    line-height: 1;
+    padding: 0.4em 1.2em;
+  }
+}
+#wrapper{
+  min-height: 100%;
+  position: relative;
+  padding-top: $base-spacing;
+}
+main {
+    padding-bottom: 200px !important;
+    @include media($large-screen) {
+      padding-bottom: 100px !important;
+    }
+}
+.container {
   margin: 0 auto;
+  padding: 0 $base-spacing;
+  @include media($large-screen) {
+    padding: 0px;
+    width: 900px;
+  }
 }
 
-#title{
-  display: table-cell;
-  vertical-align: middle;
-  text-align: right;
-  padding-right: $base-spacing;
-  width: 500px;
+.title {
+  font-size: 2em;
+  font-weight: 400;
+  color: #000;
+  margin: 0px;
+  margin-bottom: $base-spacing;
+
+}
+.result{
+  @include outer-container;
+  padding: 0px;
+  margin: 0px;
+  padding-bottom: $base-spacing;
+  margin-bottom: $base-spacing;
+  border-bottom: 1px solid desaturate(lighten($action-color, 50%), 30%);
+
+  h3{
+    @include span-columns(5);
+    font-weight: 400;
+    font-size: 1.1em;
+  }
+  .meta{
+    @include span-columns(7);
+    .top{
+      text-align: right;
+      padding-bottom: $base-spacing / 2;
+    }
+    .bottom{
+      text-align: right;
+    }
+  }
+}
+
+.result:last-child{
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+footer {
+
+  $footer-background: desaturate(darken($action-color, 20%), 30%);
+  $footer-color: white;
+  $footer-link-color: transparentize($footer-color, 0.6);
+  $footer-disclaimer-color: transparentize($footer-color, 0.6);
+
+  background: $footer-background;
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: $base-spacing;
+  width: 100%;
+
+  ul {
+    line-height: 1.5em;
+    margin: 0 0 1em 0;
+    padding: 0;
+
+    @include media($large-screen) {
+      float: left;
+      line-height: 1.8em;
+      margin-bottom: 0;
+      margin-left: 1em;
+    }
+  }
+
+  ul li {
+    list-style: none;
+    padding-right: 1em;
+    color: $footer-link-color;
+    @include media($large-screen) {
+      display: inline;
+      text-align: left;
+    }
+  }
+
+  ul li a {
+    color: $footer-link-color;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+      color: transparentize($footer-color, 0);
+    }
+  }
+
+  .footer-secondary-links {
+    @include media($large-screen) {
+      float: right;
+    }
+
+    li {
+      font-size: 0.8em;
+    }
+
+    ul.footer-social {
+      margin: 1em 0 0 0;
+
+      @include media($large-screen) {
+        float: right;
+        margin-top: 0;
+      }
+
+      li {
+        float: left;
+        font-size: 1em;
+        line-height: 0;
+        margin: 0;
+        padding-right: 0.7em;
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+
+      img {
+        height: 1.6em;
+        opacity: 0.7;
+        padding: 1px;
+
+        &:focus,
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+#splash{
+  height: 100%;
+  margin: 0 auto;
+  padding-top: $base-spacing;
+  @include media($large-screen){
+    padding: 0px;
+    display: table;
+  }
+  header{
+    text-align: center;
+    @include media($large-screen){
+      display: table-cell;
+      vertical-align: middle;
+      text-align: right;
+      padding-right: $base-spacing;
+      width: 500px;
+    }
+  }
   h1{
     font-size: 3em;
-    font-weight: 300;
+    font-weight: 400;
     padding: 0px;
     margin: 0px;
     color: #000;
   }
-}
-
-#intro{
-  display: table-cell;
-  vertical-align: middle;
-  p{
-
-    padding-top: $base-spacing;
+  section{
+    padding: 0 $base-spacing;
+    text-align: center;
+    @include media($large-screen){
+      padding: 0 $base-spacing 0 0;
+      text-align: left;
+      display: table-cell;
+      vertical-align: middle;
+    }
+    p{
+      padding-top: $base-spacing;
+    }
   }
+}
+.icon > svg {
+  display: inline-block;
+  margin: 0px 5px 0px 0px;
+}
+svg{
+  vertical-align: middle;
+}
+.icon {
+    width: 1em;
+    height: 1em;
+    fill: #000;
 }
