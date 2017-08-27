@@ -13,9 +13,12 @@ defmodule Data.ProjectTest do
     refute changeset.valid?
   end
 
-  test "project is valid" do
-    changeset = Project.changeset(%Project{}, %{name: "project name", url: "http://example.com"})
-    assert changeset.valid?
+  test "project is valid and api token generated" do
+    %{changes: changes, valid?: valid} =
+        Project.changeset(%Project{}, %{name: "project name", url: "http://example.com"})
+
+    assert valid
+    assert String.length(changes.api_token) == 32
   end
 
   test "project tags are optional" do

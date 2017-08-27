@@ -73,7 +73,13 @@ defmodule Data.Opportunities do
     end
   end
 
-  defp map_labels(%{"labels" => labels} = params),
-    do: Map.put(params, "level", map_from_labels(labels, level_mapping()))
+  defp map_labels(%{"labels" => labels} = params) do
+    params
+    |> Map.put("level", map_from_labels(labels, level_mapping()))
+    |> Map.put("type", map_from_labels(labels, type_mapping()))
+  end
+
   defp map_labels(params), do: params
+
+  defp type_mapping, do: Application.get_env(:data, :type_label_mapping)
 end

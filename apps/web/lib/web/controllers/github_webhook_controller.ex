@@ -7,6 +7,8 @@ defmodule Web.GitHubWebhookController do
 
   alias Data.{Opportunities, Projects}
 
+  plug :authorize
+
   def create(conn, %{"action" => action, "issue" => issue} = issue_event)
     when is_map(issue) and action in ["closed", "labeled", "opened", "reopened"] do
 
@@ -39,9 +41,23 @@ defmodule Web.GitHubWebhookController do
     }
   end
 
+  defp authorize(conn, _opts) do
+    conn
+    |> Plug.Conn.get_req_header("x-hub-signature")
+    |> project_for_token
+    |> handle_request(conn)
+  end
+
+  defp handle_request(nil, conn), do: thank_you(conn)
+  defp handle_request(_project, conn), do: conn
+
+  defp project_for_token([]), do: nil
+  defp project_for_token([api_token|_]), do: Projects.get(%{api_token: api_token})
+
   defp thank_you(conn) do
     conn
     |> Plug.Conn.put_resp_header("content-type", "application/json")
     |> send_resp(201, Poison.encode!(%{msg: "thank you"}))
+    |> halt
   end
 end

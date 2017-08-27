@@ -28,3 +28,15 @@ msgstr "Starter"
 #: lib/web/views/opportunities_view.ex:9
 msgid "difficulty-unknown"
 msgstr "Unknown"
+
+msgid "type-bug"
+msgstr "Bug"
+
+msgid "type-documentation"
+msgstr "Documentation"
+
+msgid "type-enhancement"
+msgstr "Enhancement"
+
+msgid "type-feature"
+msgstr "Feature"

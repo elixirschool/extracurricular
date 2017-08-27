@@ -6,7 +6,7 @@ defmodule Data.OpportunityTest do
   alias Data.Opportunity
 
   test "opportunity is invalid without a title" do
-    attributes = %{level: "beginner", project: insert(:project).id, url: "https://example.com/tracker/1"}
+    attributes = %{level: "starter", project: insert(:project).id, url: "https://example.com/tracker/1"}
     changeset = Opportunity.changeset(%Opportunity{}, attributes)
     refute changeset.valid?
   end

@@ -2,11 +2,16 @@ use Mix.Config
 
 config :data,
   ecto_repos: [Data.Repo],
-  levels: [1, 5, 9],
   level_label_mapping: %{
     1 => ["kind:beginner", "kind:starter", "level:starter"],
     5 => ["kind:intermediate", "level:intermediate"],
     9 => ["kind:advanced", "level:advanced"]
+  },
+  type_label_mapping: %{
+    "bug" => ["kind:bug", "bug"],
+    "documentation" => ["kind:documentation", "documentation"],
+    "enhancement" => ["kind:enhancement", "enhancement"],
+    "feature" => ["kind:feature", "feature"]
   }
 
 config :data, Data.Repo,

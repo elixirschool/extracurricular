@@ -1,8 +1,6 @@
 defmodule Web.GitHubWebhookControllerTest do
   use Web.ConnCase
 
-  import ExUnit.CaptureLog
-
   alias Data.{Opportunities, Projects}
 
   defp webhook_body_for_project(project) do
@@ -49,10 +47,11 @@ defmodule Web.GitHubWebhookControllerTest do
       [payload: payload]
     end
 
-    test "POST /webhooks/github creates opportunity", %{conn: conn, payload: payload} do
+    test "POST /webhooks/github creates opportunity", %{conn: conn, payload: payload, project: project} do
       conn =
         conn
         |> put_req_header("content-type", "application/json")
+        |> put_req_header("x-hub-signature", project.api_token)
         |> post("/webhooks/github", payload)
 
       json_response(conn, 201)
@@ -64,7 +63,13 @@ defmodule Web.GitHubWebhookControllerTest do
 
   describe "with no existing project" do
     setup do
-      [project: %{name: "this-project-should-never-be-in-the-db", url: "https://github.com/this-should-never-be-in-the-db"}]
+      project =
+        %{
+          name: "this-project-should-never-be-in-the-db",
+          url: "https://github.com/repos/elixirschool/extracurricular"
+        }
+
+      [project: project]
     end
 
     setup context do
@@ -77,21 +82,15 @@ defmodule Web.GitHubWebhookControllerTest do
     end
 
     test "POST /webhooks/github does not create opportunity", %{conn: conn, payload: payload} do
+      conn =
+        conn
+        |> put_req_header("content-type", "application/json")
+        |> post("/webhooks/github", payload)
 
-      fun = fn ->
-        conn =
-          conn
-          |> put_req_header("content-type", "application/json")
-          |> post("/webhooks/github", payload)
+      json_response(conn, 201)
 
-        json_response(conn, 201)
-
-        opportunities = Opportunities.all()
-        assert length(opportunities.entries) == 0
-      end
-
-      assert capture_log(fun) =~ "payload for untracked project"
-
+      opportunities = Opportunities.all()
+      assert length(opportunities.entries) == 0
     end
   end
 end

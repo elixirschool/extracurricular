@@ -54,4 +54,9 @@ defmodule Web.OpportunitiesView do
     |> String.split(",")
     |> Enum.map(&String.to_integer/1)
   end
+
+  def translated_type(%{type: "bug"}), do: gettext("type-bug")
+  def translated_type(%{type: "documentation"}), do: gettext("type-documentation")
+  def translated_type(%{type: "enhancement"}), do: gettext("type-enhancement")
+  def translated_type(%{type: "feature"}), do: gettext("type-feature")
 end
