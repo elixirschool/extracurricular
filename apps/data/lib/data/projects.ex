@@ -14,13 +14,6 @@ defmodule Data.Projects do
 
   def get(params), do: Repo.get_by(Project, params)
 
-  def get_or_insert(params) do
-    case get(params) do
-      nil -> insert(params)
-      project -> {:ok, project}
-    end
-  end
-
   def insert(params) do
     %Project{}
     |> Project.changeset(params)
