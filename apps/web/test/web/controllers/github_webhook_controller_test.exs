@@ -1,12 +1,12 @@
 defmodule Web.GitHubWebhookControllerTest do
   use Web.ConnCase
 
-  alias Data.Opportunities
+  import ExUnit.CaptureLog
 
-  test "POST /webhooks/github", %{conn: conn} do
-    # Fields omitted from official webhook payload for brevity
+  alias Data.{Opportunities, Projects}
 
-    body = %{
+  defp webhook_body_for_project(project) do
+    %{
       "action": "opened",
       "issue": %{
         "html_url": "https://github.com/repos/elixirschool/extracurricular/issues/2",
@@ -25,22 +25,74 @@ defmodule Web.GitHubWebhookControllerTest do
         "closed_at": nil
       },
       "repository": %{
-        "name": "public-repo",
-        "html_url": "https://.github.com/repos/elixirschool/extracurricular"
+        "name": project.name,
+        "html_url": project.url,
       },
       "sender": %{
         "login": "doomspork"
       }
     }
+  end
 
-    conn =
-      conn
-      |> put_req_header("content-type", "application/json")
-      |> post("/webhooks/github", Poison.encode!(body))
+  describe "with existing project" do
+    setup do
+      {:ok, project} = Projects.insert(%{name: "public-repo", url: "https://github.com/repos/elixirschool/extracurricular"})
+      [project: project]
+    end
 
-    json_response(conn, 201)
+    setup context do
+      payload =
+        context.project
+        |> webhook_body_for_project
+        |> Poison.encode!
 
-    opportunities = Opportunities.all()
-    assert length(opportunities.entries) == 1
+      [payload: payload]
+    end
+
+    test "POST /webhooks/github creates opportunity", %{conn: conn, payload: payload} do
+
+      conn =
+        conn
+        |> put_req_header("content-type", "application/json")
+        |> post("/webhooks/github", payload)
+
+      json_response(conn, 201)
+
+      opportunities = Opportunities.all()
+      assert length(opportunities.entries) == 1
+    end
+  end
+
+  describe "with no existing project" do
+    setup do
+      [project: %{name: "this-project-should-never-be-in-the-db", url: "https://github.com/this-should-never-be-in-the-db"}]
+    end
+
+    setup context do
+      payload =
+        context.project
+        |> webhook_body_for_project
+        |> Poison.encode!
+
+      [payload: payload]
+    end
+
+    test "POST /webhooks/github does not create opportunity", %{conn: conn, payload: payload} do
+
+      fun = fn ->
+        conn =
+          conn
+          |> put_req_header("content-type", "application/json")
+          |> post("/webhooks/github", payload)
+
+        json_response(conn, 201)
+
+        opportunities = Opportunities.all()
+        assert length(opportunities.entries) == 0
+      end
+
+      assert capture_log(fun) =~ "payload for untracked project"
+
+    end
   end
 end

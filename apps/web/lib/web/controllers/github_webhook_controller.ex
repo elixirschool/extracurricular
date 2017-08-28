@@ -3,6 +3,7 @@ defmodule Web.GitHubWebhookController do
   GitHub Webhook controller is responsible for all incoming requests from GitHub
   """
   use Web, :controller
+  require Logger
 
   alias Data.{Opportunities, Projects}
 
@@ -19,11 +20,13 @@ defmodule Web.GitHubWebhookController do
   end
 
   def process_issue(%{"issue" => issue, "repository" => %{"html_url" => url, "name" => name}}) do
-    {:ok, project} = Projects.get_or_insert(%{url: url, name: name})
-
-    issue
-    |> attributes(project)
-    |> Opportunities.insert_or_update
+    case Projects.get(%{url: url}) do
+      nil -> Logger.warn("Received issue payload for untracked project: #{name} #{url}")
+      project ->
+        issue
+        |> attributes(project)
+        |> Opportunities.insert_or_update
+    end
   end
 
   defp attributes(issue, %{id: project_id}) do
