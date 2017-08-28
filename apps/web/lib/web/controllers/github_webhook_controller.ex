@@ -21,7 +21,7 @@ defmodule Web.GitHubWebhookController do
 
   def process_issue(%{"issue" => issue, "repository" => %{"html_url" => url, "name" => name}}) do
     case Projects.get(%{url: url}) do
-      nil -> Logger.info("Received issue payload for untracked project: #{name} #{url}")
+      nil -> Logger.warn("Received issue payload for untracked project: #{name} #{url}")
       project ->
         issue
         |> attributes(project)
