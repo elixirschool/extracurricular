@@ -25,7 +25,7 @@ defmodule Data.OpportunityTest do
 
   test "opportunity is valid" do
     attributes = %{
-      level: "beginner",
+      level: 1,
       project_id: insert(:project).id,
       title: "Example Opportunity",
       url: "https://example.com/tracker/1"

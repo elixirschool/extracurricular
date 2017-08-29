@@ -9,9 +9,9 @@ use Mix.Config
 config :web,
   namespace: Web,
   level_label_mapping: %{
-    "beginner" => ["Kind:Beginner", "Kind:Starter", "level:starter"],
-    "intermediate" => ["Kind:Intermediate", "level:intermediate"],
-    "advanced" => ["Kind:Advanced", "level:advanced"]
+    1 => ["Kind:Beginner", "Kind:Starter", "level:starter"],
+    5 => ["Kind:Intermediate", "level:intermediate"],
+    9 => ["Kind:Advanced", "level:advanced"]
   }
 
 # Configures the endpoint

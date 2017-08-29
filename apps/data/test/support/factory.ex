@@ -13,7 +13,7 @@ defmodule Data.Factory do
 
   def opportunity_factory do
     %Opportunity{
-      level: "starter",
+      level: 1,
       title: "Example Opportunity",
       url: sequence("https://example.com/tracker/"),
       project: build(:project)
