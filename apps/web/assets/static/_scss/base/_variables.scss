@@ -3,7 +3,7 @@ $medium-screen: 600px;
 $large-screen: 900px;
 
 // Typography
-$base-font-family: 'Roboto Slab', serif;
+$base-font-family: 'Roboto', sans-serif;
 $heading-font-family: $base-font-family;
 
 // Font Sizes
@@ -25,9 +25,13 @@ $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #ddd;
 
+$es-header: #F07E6B;
+$es-anchor: #4A365F;
+$es-purple: #594167;
+
 // Font Colors
 $base-font-color: $dark-gray;
-$action-color: $blue;
+$action-color: $es-purple; // footer, and links
 
 // Border
 $base-border-color: $light-gray;
