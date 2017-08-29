@@ -7,7 +7,7 @@ defmodule Data.OpportunitiesTest do
 
   test "inserts new opportunity when valid" do
     attributes = %{
-      level: "beginner",
+      level: 1,
       project_id: insert(:project).id,
       title: "Example Opportunity",
       url: "https://example.com/tracker/1"
@@ -25,7 +25,7 @@ defmodule Data.OpportunitiesTest do
     insert(:opportunity, title: "B Example")
     insert(:opportunity, title: "C Example")
     insert(:opportunity, title: "A Example")
-    %{entries: opportunities} = Opportunities.all(%{sort_by: :title}) 
+    %{entries: opportunities} = Opportunities.all(%{sort_by: :title})
 
     assert [%{title: "A Example"}, %{title: "B Example"}, %{title: "C Example"}] = opportunities
   end

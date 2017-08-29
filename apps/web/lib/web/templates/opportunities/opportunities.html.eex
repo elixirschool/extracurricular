@@ -19,7 +19,7 @@
         <%= for tag <- results.project.tags do %>
         <span class="badge-tag"><svg class="icon icon-tag"><use xlink:href="#icon-tag"></use></svg> <%= tag %></span>
         <% end %>
-          <span class="badge-<%= results.level %>"><%= results.level %></span></div>
+        <span class="badge-<%= results.level %>"><%= translated_difficulty(results) %></span></div>
       </div>
     </div>
   <% end %>

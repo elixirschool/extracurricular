@@ -12,7 +12,7 @@ defmodule Data.Opportunity do
 
   schema "opportunities" do
     field :closed_at, :utc_datetime # when it was closed/completed
-    field :level, :string # starter, intermediate, advanced
+    field :level, :integer # placeholder for starter, intermediate, advanced
     field :title, :string
     field :url, :string
 

@@ -7,7 +7,7 @@ defmodule Web.OpportunitiesControllerTest do
     {:ok, %{id: project_id}} = Projects.insert(%{name: "Example Project", url: "example.com"})
 
     attributes = %{
-      level: "beginner",
+      level: 1,
       project_id: project_id,
       title: "Example Opportunity",
       url: "https://example.com/tracker/1"
