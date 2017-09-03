@@ -37,14 +37,15 @@ defmodule Web.Mixfile do
   defp deps do
     [
       {:appsignal, "~> 1.3"},
+      {:cowboy, "~> 1.0"},
       {:data, in_umbrella: true},
+      {:gettext, "~> 0.11"},
       {:phoenix, "~> 1.3.0"},
-      {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
-      {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:phoenix_pubsub, "~> 1.0"},
+      {:scrivener_html, "~> 1.7"}
     ]
   end
 end

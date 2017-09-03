@@ -10,6 +10,9 @@
 msgid ""
 msgstr ""
 
+msgid "extracurricular-subtitle"
+msgstr "An initiative to increase the visibility of open source opportunities within the Elixir community."
+
 #: lib/web/views/opportunities_view.ex:8
 msgid "difficulty-advanced"
 msgstr "Advanced"

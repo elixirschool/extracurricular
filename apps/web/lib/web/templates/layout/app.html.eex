@@ -11,7 +11,14 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
   <body>
-    <%= render @view_module, @view_template, assigns %>
+    <div class="container main">
+      <%= render @view_module, @view_template, assigns %>
+    </div>
+    <footer class="footer">
+      <div class="container text-center">
+        <span class="footer-text">&copy; 2017 <a href="https://github.com/elixirschool" target="_blank">Elixir School</a></span>
+      </div>
+    </footer>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

@@ -31,6 +31,10 @@ config :logger, :console,
 config :web, :generators,
   context_app: false
 
+config :scrivener_html,
+  routes_helper: Web.Router.Helpers,
+  view_style: :bootstrap_v4
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

@@ -4,15 +4,16 @@ defmodule Data.Opportunities do
   """
 
   alias Data.{Opportunity, Repo}
-  require Ecto.Query
+  import Ecto.Query, except: [update: 2]
 
-  @defaults %{include: [], sort_by: :inserted_at, page: 1, page_size: 25}
+  @defaults %{filters: %{}, include: [], sort_by: :inserted_at, page: 1, page_size: 5}
 
   def all(opts \\ %{}) do
     opts = Map.merge(@defaults, opts)
 
     Opportunity
     |> Ecto.Query.order_by(^opts.sort_by)
+    |> filters(opts.filters)
     |> Repo.paginate(page: opts.page, page_size: opts.page_size)
     |> include(opts.include)
   end
@@ -43,6 +44,10 @@ defmodule Data.Opportunities do
     |> Opportunity.changeset(params)
     |> Repo.update
   end
+
+  defp filter({field, value}, query) when is_list(value), do: where(query, [o], field(o, ^field) in ^value)
+
+  defp filters(query, filters), do: Enum.reduce(filters, query, &filter/2)
 
   defp include(results, nil), do: results
   defp include(%{entries: entries} = results, schemas) do

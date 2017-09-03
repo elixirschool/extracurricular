@@ -20,7 +20,10 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: "css/app.css",
+      order: {
+        after: ["priv/static/css/app.scss"]
+      }
     },
     templates: {
       joinTo: "js/app.js"
@@ -48,9 +51,13 @@ exports.config = {
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/]
     },
+    copycat: {
+      "fonts": ["node_modules/font-awesome/fonts"]
+    },
     sass: {
       options: {
-        includePaths: ['static/_scss']
+        includePaths: ["node_modules/bootstrap/scss", "node_modules/font-awesome/scss"], // tell sass-brunch where to look for files to @import
+        precision: 8 // minimum precision required by bootstrap
       }
     }
   },
@@ -60,8 +67,12 @@ exports.config = {
       "js/app.js": ["js/app"]
     }
   },
-
   npm: {
-    enabled: true
+    enabled: true,
+    globals: { // Bootstrap JavaScript requires both '$', 'jQuery', and Tether in global scope
+      $: 'jquery',
+      jQuery: 'jquery',
+      bootstrap: 'bootstrap' // require Bootstrap JavaScript globally too
+    }
   }
 };

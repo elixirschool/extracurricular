@@ -1,40 +1,111 @@
 @charset "utf-8";
-@import 'bourbon/bourbon';
-@import 'base/base';
-@import 'neat/neat';
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300|Roboto:300,500');
 
-@mixin font-smoothing($value: on) {
-    @if $value == on {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-    @else {
-        -webkit-font-smoothing: subpixel-antialiased;
-        -moz-osx-font-smoothing: auto;
-    }
-}
+$base-duration: 150ms;
+$base-timing: ease;
 
+$es-header: #F07E6B;
+$es-anchor: #4A365F;
+$es-purple: #594167;
 
 $small-font-size: 0.75em;
+
 $badges: (
-  "1": #e6efc2,
-  "9": #fbe3e4,
-  "5": #fff6bf,
-  "tag": #eee,
+"1": #e6efc2,
+"9": #fbe3e4,
+"5": #fff6bf,
+"tag": #eee,
+"disabled": #f2f5f5
 ) !default;
-html,
-body {
-    width: 100%;
-    height: 100%;
+
+$fa-font-path: "../fonts";
+
+@import "font-awesome";
+
+@import "bootstrap";
+
+html {
+  position: relative;
+  min-height: 100%;
 }
+
 body{
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  margin: 0 $base-spacing;
-  padding: 0;
-  @include font-smoothing(on);
 }
+
+.main {
+  margin-bottom: 60px
+}
+
+.container {
+  width: auto;
+  max-width: 800px;
+  padding: 0 15px;
+}
+
+a {
+  color: $es-anchor;
+  text-decoration: none;
+  transition: color $base-duration $base-timing;
+
+  &:active,
+  &:focus,
+  &:hover {
+    color: tint($es-anchor, 25%);
+  }
+}
+
+.icon > svg {
+  display: inline-block;
+  margin: 0px 5px 0px 0px;
+}
+
+svg{
+  vertical-align: middle;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+}   
+
+.filters {
+  padding-bottom: 20px;
+}
+
+nav > ul {
+  justify-content: center;
+}
+
+.page-link {
+  color: $es-anchor;
+  padding: 0.25rem 0.5rem;
+}
+
+.page-item.active .page-link {
+  background-color: $es-header;
+  border-color: $es-header;
+}
+
+.footer {
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background: $es-purple;
+  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAALUlEQVQYV2P0Mov/z0AEYKRY4f///58zMjJKwiyj3ER0Z9PIRHSHYwst6lsNAMs/GrcD9Fh5AAAAAElFTkSuQmCC) repeat;
+
+  padding-top: 15px;
+
+  a {
+    color: #fff;
+    font-weight: 500;
+  }
+}
+
 @each $badge-type, $color in $badges {
   .badge-#{$badge-type} {
     background-color: $color;
@@ -47,206 +118,21 @@ body{
     padding: 0.4em 1.2em;
   }
 }
-#wrapper{
-  min-height: 100%;
-  position: relative;
-  padding-top: $base-spacing;
-}
-main {
-    padding-bottom: 200px !important;
-    @include media($large-screen) {
-      padding-bottom: 100px !important;
-    }
-}
-.container {
-  margin: 0 auto;
-  padding: 0 $base-spacing;
-  @include media($large-screen) {
-    padding: 0px;
-    width: 900px;
-  }
+
+.jumbotron {
+  margin-bottom: 0;
+  background-color: #fff;
+  padding: 1rem 0rem;
+
 }
 
-.title {
-  font-family: "Roboto Slab", serif;
-  font-weight: 300;
-  font-size: 3.25rem;
+.jumbotron-heading {
+  font-weight: 500;
+  font-size: 4em;
   color: $es-purple;
-  margin: 0px;
-  margin-bottom: $base-spacing;
-
-}
-.result{
-  @include outer-container;
-  padding: 0px;
-  margin: 0px;
-  padding-bottom: $base-spacing;
-  margin-bottom: $base-spacing;
-  border-bottom: 1px solid desaturate(lighten($action-color, 50%), 30%);
-
-  h3{
-    @include span-columns(5);
-    font-weight: 500;
-    font-size: 1.1em;
-  }
-  .meta{
-    @include span-columns(7);
-    .top{
-      text-align: right;
-      padding-bottom: $base-spacing / 2;
-    }
-    .bottom{
-      text-align: right;
-    }
-  }
+  margin: 0rem 0rem 1rem 0rem;
 }
 
-.result:last-child{
-  border: 0px;
-  padding: 0px;
-  margin: 0px;
-}
-
-footer {
-
-  $footer-background: $action-color;
-  $footer-color: white;
-  $footer-link-color: transparentize($footer-color, 0.6);
-  $footer-disclaimer-color: transparentize($footer-color, 0.6);
-
-  background: $footer-background;
-  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAALUlEQVQYV2P0Mov/z0AEYKRY4f///58zMjJKwiyj3ER0Z9PIRHSHYwst6lsNAMs/GrcD9Fh5AAAAAElFTkSuQmCC) repeat;
-  display: inline-block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: $base-spacing;
-  width: 100%;
-
-  ul {
-    line-height: 1.5em;
-    margin: 0 0 1em 0;
-    padding: 0;
-
-    @include media($large-screen) {
-      float: left;
-      line-height: 1.8em;
-      margin-bottom: 0;
-      margin-left: 1em;
-    }
-  }
-
-  ul li {
-    list-style: none;
-    padding-right: 1em;
-    color: $footer-link-color;
-    @include media($large-screen) {
-      display: inline;
-      text-align: left;
-    }
-  }
-
-  ul li a {
-    color: $footer-link-color;
-    text-decoration: none;
-
-    &:focus,
-    &:hover {
-      color: transparentize($footer-color, 0);
-    }
-  }
-
-  .footer-secondary-links {
-    @include media($large-screen) {
-      float: right;
-    }
-
-    li {
-      font-size: 0.8em;
-    }
-
-    ul.footer-social {
-      margin: 1em 0 0 0;
-
-      @include media($large-screen) {
-        float: right;
-        margin-top: 0;
-      }
-
-      li {
-        float: left;
-        font-size: 1em;
-        line-height: 0;
-        margin: 0;
-        padding-right: 0.7em;
-
-        &:last-child {
-          padding-right: 0;
-        }
-      }
-
-      img {
-        height: 1.6em;
-        opacity: 0.7;
-        padding: 1px;
-
-        &:focus,
-        &:hover {
-          opacity: 1;
-        }
-      }
-    }
-  }
-}
-
-#splash{
-  height: 100%;
-  margin: 0 auto;
-  padding-top: $base-spacing;
-  @include media($large-screen){
-    padding: 0px;
-    display: table;
-  }
-  header{
-    text-align: center;
-    @include media($large-screen){
-      display: table-cell;
-      vertical-align: middle;
-      text-align: right;
-      padding-right: $base-spacing;
-      width: 500px;
-    }
-  }
-  h1{
-    font-size: 3em;
-    font-weight: 400;
-    padding: 0px;
-    margin: 0px;
-    color: $es-purple;
-  }
-  section{
-    padding: 0 $base-spacing;
-    text-align: center;
-    @include media($large-screen){
-      padding: 0 $base-spacing 0 0;
-      text-align: left;
-      display: table-cell;
-      vertical-align: middle;
-    }
-    p{
-      padding-top: $base-spacing;
-    }
-  }
-}
-.icon > svg {
-  display: inline-block;
-  margin: 0px 5px 0px 0px;
-}
-svg{
-  vertical-align: middle;
-}
-.icon {
-    width: 1em;
-    height: 1em;
-    fill: #000;
+.jumbotron .container {
+  max-width: 40rem;
 }
