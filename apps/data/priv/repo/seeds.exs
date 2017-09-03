@@ -9,7 +9,6 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-
 project_params_1 = %{
   name: "Elixir School",
   tags: ["elixir"],
@@ -32,27 +31,42 @@ project_params_3 = %{
 {:ok, extracirricular} = Data.Projects.insert(project_params_2)
 {:ok, appendix}        = Data.Projects.insert(project_params_3)
 
-opportunity_params_1 = %{
-  title: "Understanding GenServers and State",
-  level: 1,
-  url: "https://github.com/elixirschool/appendix/issues/1",
-  project_id: appendix.id
-}
+opportunties =
+  [%{
+    title: "Understanding GenServers and State",
+    level: 2,
+    url: "https://github.com/elixirschool/appendix/issues/1",
+    project_id: appendix.id
+  }, %{
+    title: "Translate to pig latin",
+    level: 1,
+    url: "https://github.com/elixirschool/elixirschool/issues/1",
+    project_id: elixir_school.id
+  }, %{
+    title: "Pipelines in Elixir",
+    level: 1,
+    url: "https://github.com/elixirschool/appendix/issues/1",
+    project_id: appendix.id
+  }, %{
+    title: "Implement API for sorting",
+    level: 5,
+    url: "https://github.com/elixirschool/extracirricular/issues/1",
+    project_id: extracirricular.id
+  }, %{
+    title: "Fix grammar in Basic lesssons",
+    level: 1,
+    url: "https://github.com/elixirschool/elixirschool/issues/1",
+    project_id: elixir_school.id
+  }, %{
+    title: "Support JSON API for controller responses",
+    level: 9,
+    url: "https://github.com/elixirschool/extracirricular/issues/1",
+    project_id: extracirricular.id
+  }, %{
+    title: "Add new lesson on Registry",
+    level: 5,
+    url: "https://github.com/elixirschool/elixirschool/issues/1",
+    project_id: elixir_school.id
+  }]
 
-opportunity_params_2 = %{
-  title: "Translate to pig latin",
-  level: 1,
-  url: "https://github.com/elixirschool/elixirschool/issues/1",
-  project_id: elixir_school.id
-}
-
-opportunity_params_3 = %{
-  title: "Implement API for sorting",
-  level: 1,
-  url: "https://github.com/rails/rails/issues/1",
-  project_id: extracirricular.id
-}
-
-{:ok, _} = Data.Opportunities.insert(opportunity_params_1)
-{:ok, _} = Data.Opportunities.insert(opportunity_params_2)
-{:ok, _} = Data.Opportunities.insert(opportunity_params_3)
+Enum.each(opportunties, &Data.Opportunities.insert/1)

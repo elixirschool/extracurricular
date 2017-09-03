@@ -13,7 +13,7 @@ defmodule Web.Locale do
       nil -> conn
       locale ->
         Gettext.put_locale(Web.Gettext, locale)
-        conn |> put_session(:locale, locale)
+        put_session(conn, :locale, locale)
     end
   end
 end
