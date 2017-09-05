@@ -7,12 +7,7 @@ use Mix.Config
 
 # General application configuration
 config :web,
-  namespace: Web,
-  level_label_mapping: %{
-    1 => ["Kind:Beginner", "Kind:Starter", "level:starter"],
-    5 => ["Kind:Intermediate", "level:intermediate"],
-    9 => ["Kind:Advanced", "level:advanced"]
-  }
+  namespace: Web
 
 # Configures the endpoint
 config :web, Web.Endpoint,

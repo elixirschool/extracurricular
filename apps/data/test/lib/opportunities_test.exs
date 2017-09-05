@@ -48,7 +48,7 @@ defmodule Data.OpportunitiesTest do
     result = Opportunities.all()
 
     assert result.page_number == 1
-    assert result.page_size == 25
+    assert result.page_size == 15
     assert result.total_pages == 1
     assert result.total_entries == 2
   end
