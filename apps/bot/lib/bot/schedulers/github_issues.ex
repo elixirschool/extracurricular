@@ -9,14 +9,15 @@ defmodule Bot.Scheduler.GitHubIssues do
   alias Data.{Opportunities, Projects, TaskSupervisor}
 
   @five_minutes 300_000 # milliseconds
-  @projects_per_check 10
-  @six_hours 21_600 # seconds
-  @third_seconds 30_000 # milliseconds
+  @projects_per_check 5
+  @two_hours 7_200 # seconds
+  @thirty_seconds 30_000 # milliseconds
 
-  def check_repo(%{url: url}) do
+  def check_repo(%{id: project_id, url: url}) do
      url
      |> repo
      |> GitHub.issues
+     |> Enum.map(&Map.put(&1, "project_id", project_id))
      |> Enum.each(&Opportunities.insert_or_update/1)
   end
 
@@ -34,14 +35,14 @@ defmodule Bot.Scheduler.GitHubIssues do
   end
 
   def init(_opts) do
-    Process.send_after(self(), :checks, @third_seconds)
+    Process.send_after(self(), :checks, @thirty_seconds)
 
     {:ok, init_state()}
   end
 
   def start_link(opts \\ []), do: GenServer.start_link(__MODULE__, %{}, opts)
 
-  defp expired?({_id, %{last_check: last_check}}), do: last_check + @six_hours < now()
+  defp expired?({_id, %{last_check: last_check}}), do: last_check + @two_hours < now()
 
   defp init_state do
     Projects.all()
@@ -53,7 +54,9 @@ defmodule Bot.Scheduler.GitHubIssues do
 
   defp perform_checks(projects), do: Enum.map(projects, &supervised_check(&1))
 
-  defp project_state(%{id: id} = project), do: {id, Map.put(project, :last_check, now())}
+  defp project_state(%{id: id} = project), do: {id, Map.put(project, :last_check, random_time())}
+
+  defp random_time, do: now() + Enum.random(1..3_600)
 
   defp repo("https://github.com/" <> slug), do: slug
 
