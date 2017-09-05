@@ -13,7 +13,7 @@ defmodule Data.Repo.Migrations.CreateOpportunityAndProjectTables do
       add :level, :string
       add :project_id, references(:projects), null: false
       add :url, :string, null: false
-      add :completed_at, :datetime
+      add :completed_at, :utc_datetime
 
       timestamps()
     end

@@ -9,64 +9,65 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-project_params_1 = %{
+
+project_params_1 = %Data.Project{
   name: "Elixir School",
   tags: ["elixir"],
   url: "https://github.com/elixirschool/elixirschool",
 }
 
-project_params_2 = %{
+project_params_2 = %Data.Project{
   name: "Extracurricular",
   tags: ["elixir", "open source"],
   url: "https://github.com/elixirschool/extracurricular",
 }
 
-project_params_3 = %{
+project_params_3 = %Data.Project{
   name: "Appendix",
   tags: ["elixir", "open source", "blog"],
   url: "https://github.com/elixirschool/appendix",
 }
 
-{:ok, elixir_school}   = Data.Projects.insert(project_params_1)
-{:ok, extracirricular} = Data.Projects.insert(project_params_2)
-{:ok, appendix}        = Data.Projects.insert(project_params_3)
+{:ok, elixir_school}   = Data.Repo.insert(project_params_1)
+{:ok, extracirricular} = Data.Repo.insert(project_params_2)
+{:ok, appendix}        = Data.Repo.insert(project_params_3)
 
 opportunties =
-  [%{
+  [%Data.Opportunity{
     title: "Understanding GenServers and State",
     level: 2,
     url: "https://github.com/elixirschool/appendix/issues/1",
     project_id: appendix.id
-  }, %{
+  }, %Data.Opportunity{
     title: "Translate to pig latin",
     level: 1,
     url: "https://github.com/elixirschool/elixirschool/issues/1",
     project_id: elixir_school.id
-  }, %{
+  }, %Data.Opportunity{
     title: "Pipelines in Elixir",
     level: 1,
     url: "https://github.com/elixirschool/appendix/issues/1",
     project_id: appendix.id
-  }, %{
+  }, %Data.Opportunity{
     title: "Implement API for sorting",
     level: 5,
     url: "https://github.com/elixirschool/extracirricular/issues/1",
     project_id: extracirricular.id
-  }, %{
+  }, %Data.Opportunity{
     title: "Fix grammar in Basic lesssons",
     level: 1,
     url: "https://github.com/elixirschool/elixirschool/issues/1",
     project_id: elixir_school.id
-  }, %{
+  }, %Data.Opportunity{
     title: "Support JSON API for controller responses",
     level: 9,
     url: "https://github.com/elixirschool/extracirricular/issues/1",
     project_id: extracirricular.id
-  }, %{
+  }, %Data.Opportunity{
     title: "Add new lesson on Registry",
     level: 5,
     url: "https://github.com/elixirschool/elixirschool/issues/1",
     project_id: elixir_school.id
   }]
 
-Enum.each(opportunties, &Data.Opportunities.insert/1)
+Enum.each(opportunties, &Data.Repo.insert/1)
