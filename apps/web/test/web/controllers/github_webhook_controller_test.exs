@@ -50,7 +50,6 @@ defmodule Web.GitHubWebhookControllerTest do
     end
 
     test "POST /webhooks/github creates opportunity", %{conn: conn, payload: payload} do
-
       conn =
         conn
         |> put_req_header("content-type", "application/json")

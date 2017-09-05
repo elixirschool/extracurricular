@@ -31,26 +31,14 @@ defmodule Web.GitHubWebhookController do
 
   defp attributes(issue, %{id: project_id}) do
     %{
-      closed_at: issue["closed_at"],
-      level:  level_from_labels(issue),
-      project_id: project_id,
-      title: issue["title"],
-      url: issue["html_url"]
+      "closed_at" => issue["closed_at"],
+      "labels" => issue["labels"],
+      "project_id" => project_id,
+      "title" => issue["title"],
+      "url" => issue["html_url"]
     }
   end
 
-  defp label_mapping, do: Application.get_env(:web, :level_label_mapping)
-
-  defp level_from_labels(%{"labels" => []}), do: nil
-  defp level_from_labels(%{"labels" => labels}) do
-    labels = Enum.map(labels, &Map.get(&1, "name"))
-    mapping = Enum.find(label_mapping(), fn {_, mappings} -> length(mappings -- (mappings -- labels)) != 0 end)
-
-    case mapping do
-      {level, _} -> level
-      _ -> nil
-    end
-  end
 
   defp thank_you(conn) do
     conn
