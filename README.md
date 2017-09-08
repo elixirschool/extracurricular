@@ -78,14 +78,15 @@ Visit `localhost:4000` and you should see this:
 This is a project for the community, contributions are encouraged!
 
 Feedback, feature requests, and fixes are welcomed.
-Please make appropriate use of [Issues][issues] and [Pull Requests][pulls].  All code
-should have accompanying tests.
+Please make appropriate use of [Issues][issues] and [Pull Requests][pulls].
+All code should have accompanying tests.
 
 [issues]: https://github.com/elixirschool/extracurricular/issues
 [pulls]: https://github.com/elixirschool/extracurricular/pulls
 
 ## License
 
-MIT license. Please see [LICENSE][license] for details.
+MIT license.
+Please see [LICENSE][license] for details.
 
 [LICENSE]: https://github.com/elixirschool/extracurricular/blob/master/LICENSE
