@@ -59,7 +59,7 @@
         # Priority values are: `low, normal, high, higher`
         #
         {Credo.Check.Design.AliasUsage,
-          excluded_namespaces: ["File", "IO", "Inspect", "Kernel", "Macro", "Plug", "Supervisor", "Task", "Version"],
+          excluded_namespaces: ["Appsignal", "Ecto", "File", "IO", "Inspect", "Kernel", "Macro", "Plug", "Supervisor", "Task", "Version"],
           priority: :low},
 
         # For others you can set parameters

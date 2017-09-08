@@ -4,6 +4,7 @@ defmodule Bot.Client.GitHub do
   """
 
   use HTTPoison.Base
+
   import Appsignal.Instrumentation.Helpers, only: [instrument: 4]
 
   def process_response_body(body), do: Poison.decode!(body)
