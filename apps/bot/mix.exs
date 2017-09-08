@@ -3,7 +3,7 @@ defmodule Bot.Mixfile do
 
   def project do
     [app: :bot,
-     version: "0.1.0",
+     version: "0.0.1",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
      deps_path: "../../deps",
@@ -22,7 +22,9 @@ defmodule Bot.Mixfile do
   defp deps do
     [
       {:appsignal, "~> 1.3"},
+      {:data, in_umbrella: true},
       {:httpoison, "~> 0.13.0"},
+
       {:bypass, "~> 0.8.1", only: :test}
     ]
   end

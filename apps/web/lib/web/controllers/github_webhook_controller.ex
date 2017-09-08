@@ -39,7 +39,6 @@ defmodule Web.GitHubWebhookController do
     }
   end
 
-
   defp thank_you(conn) do
     conn
     |> Plug.Conn.put_resp_header("content-type", "application/json")
