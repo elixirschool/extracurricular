@@ -33,46 +33,6 @@ $ iex -S mix phx.server
 
 Visit [localhost:4000](localhost:4000) and you should see this a local instance of the application!
 
-## Running the Project
-Once you have cloned the repo and `cd`'d in, its quite simple to get started.
-First, we get our dependencies and compile everything.
-
-```bash
-$ mix do deps.get, compile
-```
-
-Now, you will need to have Postgres running and have a user `postgres` with the password `postgres`, or fill out the proper credentials in `apps/web/config/dev.exs` and `apps/web/config/test.exs`.
-Once you have gotten this proper, its time to create the database and run our migrations.
-
-```bash
-$ mix do ecto.create, ecto.migrate
-```
-
-Now we seed the database
-
-```bash
-$ mix run apps/data/priv/repo/seeds.exs
-```
-
-From here, we need to build all of our javascript pieces.
-Ensure you have `brunch` installed, and then do this.
-
-```bash
-$ cd apps/web/assets
-$ brunch build
-$ cd ../../..
-```
-
-And with this we are ready to run the server
-
-```bash
-$ iex -S mix phx.server
-```
-
-Visit `localhost:4000` and you should see this:
-
-![we're up and running!](http://i.imgur.com/pU6eoNU.png)
-
 ## Getting Involved
 
 This is a project for the community, contributions are encouraged!
