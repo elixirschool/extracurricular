@@ -19,6 +19,7 @@ defmodule Extracurricular.Mixfile do
 
   defp deps do
     [
+      {:distillery, "~> 1.5"},
       {:credo, "~> 0.8.6", only: [:dev, :test], runtime: false}
     ]
   end
