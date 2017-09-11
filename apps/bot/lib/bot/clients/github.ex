@@ -19,6 +19,8 @@ defmodule Bot.Client.GitHub do
       Appsignal.Transaction.generate_id,
       :background_task
     )
+
+    transaction
     |> Appsignal.Transaction.set_action("GitHub/request")
     |> Appsignal.Transaction.set_sample_data(
       "environment", %{request_path: url}
