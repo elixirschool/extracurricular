@@ -15,14 +15,14 @@ defmodule Bot.Mixfile do
   end
 
   def application do
-    [extra_applications: [:logger],
+    [extra_applications: [:logger, :appsignal],
      mod: {Bot.Application, []}]
   end
 
   defp deps do
     [
+      {:appsignal, "~> 1.3"},
       {:httpoison, "~> 0.13.0"},
-
       {:bypass, "~> 0.8.1", only: :test}
     ]
   end
