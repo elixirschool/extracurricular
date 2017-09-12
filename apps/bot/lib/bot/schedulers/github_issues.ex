@@ -18,7 +18,7 @@ defmodule Bot.Scheduler.GitHubIssues do
      |> repo
      |> GitHub.issues
      |> Enum.map(&Map.put(&1, "project_id", project_id))
-     |> Enum.each(&Opportunities.insert_or_update/1)
+     |> Enum.each(&insert_or_update/1)
   end
 
   def handle_info(:checks, state) do
@@ -48,6 +48,12 @@ defmodule Bot.Scheduler.GitHubIssues do
     Projects.all()
     |> Enum.map(&project_state/1)
     |> Enum.into(%{})
+  end
+
+  defp insert_or_update(%{"html_url" => html_url} = issue) do
+    issue
+    |> Map.put("url", html_url)
+    |> Opportunities.insert_or_update
   end
 
   defp now, do: DateTime.to_unix(DateTime.utc_now())
