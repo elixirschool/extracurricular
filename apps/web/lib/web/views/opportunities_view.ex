@@ -18,7 +18,7 @@ defmodule Web.OpportunitiesView do
   end
 
   @doc """
-  Generate the HTML for the toggable difficulty selection
+  Generate the HTML for the togglable difficulty selection
   """
   def level_selectors(conn) do
     current_selection = selected_levels(conn)
@@ -34,9 +34,9 @@ defmodule Web.OpportunitiesView do
   defp level_selector(level, current_selection) do
     [badge, level_params] =
       if level in current_selection do
-        [level_badge(level, true), current_selection -- [level]]
+        [level_badge(level, true), (if length(current_selection) == 1, do: current_selection, else: current_selection -- [level])]
       else
-        [level_badge(level, false), [level|current_selection]]
+        [level_badge(level, Enum.empty?(current_selection)), [level|current_selection]]
       end
 
     query_params = %{level: Enum.join(level_params, ",")}

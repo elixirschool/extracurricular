@@ -14,7 +14,7 @@ defmodule Web.OpportunitiesController do
 
   defp current_page(params), do: Map.get(params, "page", 1)
 
-  defp level(%{"level" => ""}), do: []
+  defp level(%{"level" => ""}), do: [1, 5, 9]
   defp level(params) do
     params
     |> Map.get("level", "1,5,9")
