@@ -8,6 +8,7 @@
     <meta name="author" content="">
 
     <title>Extracurricular</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300|Roboto:300,500">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
   <body>
