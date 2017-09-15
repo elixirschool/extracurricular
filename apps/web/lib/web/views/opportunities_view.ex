@@ -29,7 +29,7 @@ defmodule Web.OpportunitiesView do
   end
 
   defp level_badge(_level, false), do: "badge-disabled"
-  defp level_badge(level, true), do: "badge-#{level}"
+  defp level_badge(level, true), do: "badge--#{level}"
 
   defp level_selector(level, current_selection) do
     [badge, level_params] =
