@@ -31,7 +31,7 @@
     <%= render @view_module, @view_template, assigns %>
 
     <footer class="footer">
-      <p class="footer__text">&copy; 2017 Elixir School</p>
+      <p class="footer__text">&copy; 2017 <a href="https://github.com/elixirschool">Elixir School</a></p>
     </footer>
 
     <!-- SVG Sprite -->
