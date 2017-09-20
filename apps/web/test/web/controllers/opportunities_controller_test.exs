@@ -3,21 +3,54 @@ defmodule Web.OpportunitiesControllerTest do
 
   alias Data.{Opportunities, Projects}
 
-  test "GET /", %{conn: conn} do
+  test "GET /opportunities", %{conn: conn} do
     {:ok, %{id: project_id}} = Projects.insert(%{name: "Example Project", url: "example.com"})
 
-    attributes = %{
+    Opportunities.insert(%{
       level: 1,
       project_id: project_id,
       title: "Example Opportunity",
       url: "https://example.com/tracker/1"
-    }
+    })
 
-    Opportunities.insert(attributes)
-    Opportunities.insert(%{attributes | title: "Another Opportunity"})
+    conn =
+      conn
+      |> put_req_header("accept", "application/json")
+      |> get("/opportunities")
 
-    conn = get conn, "/"
-    assert html_response(conn, 200) =~ "Example Opportunity"
-    assert html_response(conn, 200) =~ "Another Opportunity"
+    assert %{"entries" => [
+      %{"level"   => 1,
+        "project" => %{"id" => ^project_id},
+        "title"   => "Example Opportunity",
+        "url"     => "https://example.com/tracker/1"}]} = json_response(conn, 200)
+  end
+
+  test "GET /opportunities with filters", %{conn: conn} do
+    {:ok, %{id: project_id}} = Projects.insert(%{name: "Example Project", url: "example.com"})
+
+    Opportunities.insert(%{
+      level: 1,
+      project_id: project_id,
+      title: "Example Opportunity",
+      url: "https://example.com/tracker/1"
+    })
+
+    Opportunities.insert(%{
+      level: 5,
+      project_id: project_id,
+      title: "Another Opportunity",
+      url: "https://example.com/tracker/2"
+    })
+
+    conn =
+      conn
+      |> put_req_header("accept", "application/json")
+      |> get("/opportunities?levels=5")
+
+    assert %{"entries" => [
+      %{"level"   => 5,
+        "project" => %{"id" => ^project_id},
+        "title"   => "Another Opportunity",
+        "url"     => "https://example.com/tracker/2"}]} = json_response(conn, 200)
   end
 end

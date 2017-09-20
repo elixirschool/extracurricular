@@ -17,7 +17,13 @@ defmodule Web.Router do
   scope "/", Web do
     pipe_through :browser # Use the default browser stack
 
-    get "/", OpportunitiesController, :index
+    get "/", PageController, :index
+  end
+
+  scope "/", Web do
+    pipe_through :api
+
+    get "/opportunities", OpportunitiesController, :index
   end
 
   scope "/webhooks", Web do

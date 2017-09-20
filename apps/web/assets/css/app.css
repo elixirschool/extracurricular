@@ -315,3 +315,7 @@ a {
 .u-text-lower {
   text-transform: lowercase;
 }
+
+.invisible {
+  visibility: hidden;
+}
