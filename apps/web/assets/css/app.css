@@ -311,3 +311,7 @@ h4 {
 .u-text-lower {
   text-transform: lowercase;
 }
+
+.invisible {
+  visibility: hidden;
+}
