@@ -26,7 +26,7 @@ export default class Opportunity extends React.Component {
                 <a href={project.url}>{project.name}</a> 
                 <span className="opportunity__title-icon">&#9655;</span>
               </span>
-              <a href={url}>{title}</a> 
+              <a href={project.url}>{project.title}</a> 
             </h2>
           </header>
           <div className="opportunity__tags">
