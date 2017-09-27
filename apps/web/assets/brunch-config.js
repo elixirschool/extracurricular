@@ -26,7 +26,10 @@ exports.config = {
   // Configure your plugins
   plugins: {
     babel: {
-      presets: ['latest', 'react']
+      presets: ['latest', 'react'],
+      plugins: [
+        "transform-class-properties"
+      ]
     }
   },
 
