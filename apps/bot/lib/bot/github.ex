@@ -13,7 +13,7 @@ defmodule Bot.GitHub do
       |> response
 
     if next_page_number <= page do
-      body
+      Enum.filter(body, &(!Map.has_key?(&1, "pull_request")))
     else
       body ++ issues(repo, next_page_number)
     end

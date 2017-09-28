@@ -30,4 +30,28 @@ defmodule Bot.GitHubTest do
     |> Plug.Conn.put_resp_header("Link", link)
     |> Plug.Conn.resp(200, Poison.encode!([%{title: "two"}]))
   end
+
+  test "does not retreive pull requests for a repo", %{bypass: bypass} do
+    Bypass.expect(bypass, &request2/1)
+    issues = GitHub.issues("another/project")
+    assert length(issues) == 1
+    assert ["one"] == Enum.map(issues, &(&1["title"]))
+  end
+
+  defp request2(%{query_string: "assignee=none&state=open&page=1"} = conn) do
+    link = "https://localhost:1234/repo/another/project/issues?assignee=none&state=open&page=1>; rel=\"next\""
+
+    conn
+    |> Plug.Conn.put_resp_header("Link", link)
+    |> Plug.Conn.resp(200, Poison.encode!([%{title: "one"}]))
+  end
+
+  defp request2(%{query_string: "assignee=none&state=open&page=2"} = conn) do
+    link = "https://localhost:1234/repo/another/project/issues?assignee=none&state=open&page=1>; rel=\"next\""
+
+    conn
+    |> Plug.Conn.put_resp_header("Link", link)
+    |> Plug.Conn.resp(200, Poison.encode!([%{title: "two", pull_request: "something"}]))
+  end
+
 end
