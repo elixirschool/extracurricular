@@ -2,7 +2,7 @@ import React from 'react';
 
 const toggleLevels = function(levels, level) {
   if (levels.includes(level)) {
-    var index = levels.indexOf(level);
+    const index = levels.indexOf(level);
     levels.splice(index, 1);
   } else {
     levels.push(level);
@@ -40,10 +40,10 @@ export default class Filters extends React.Component {
   }
 
   toggleLevel(level) {
-    var levels = this.props.filters.levels;
+    const levels = this.props.filters.levels;
 
     if (levels.includes(level)) {
-      var index = levels.indexOf(level);
+      const index = levels.indexOf(level);
       levels.splice(index, 1);
     } else {
       levels.push(level);
