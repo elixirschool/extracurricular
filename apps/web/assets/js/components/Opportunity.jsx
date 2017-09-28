@@ -15,7 +15,7 @@ const translated_difficulty = (level) => {
 
 export default class Opportunity extends React.Component {
   render() {
-    const { level, title, project} = this.props.data;
+    const { level, title, project, url } = this.props.data;
 
     return (
       <li className="list__item">
@@ -26,7 +26,7 @@ export default class Opportunity extends React.Component {
                 <a href={project.url}>{project.name}</a> 
                 <span className="opportunity__title-icon">&#9655;</span>
               </span>
-              <a href={project.url}>{project.title}</a> 
+              <a href={url}>{title}</a>
             </h2>
           </header>
           <div className="opportunity__tags">
