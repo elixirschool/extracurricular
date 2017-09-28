@@ -14,18 +14,21 @@ project_params_1 = %Data.Project{
   name: "Elixir School",
   tags: ["elixir"],
   url: "https://github.com/elixirschool/elixirschool",
+  api_token: "dummy1",
 }
 
 project_params_2 = %Data.Project{
   name: "Extracurricular",
   tags: ["elixir", "open source"],
   url: "https://github.com/elixirschool/extracurricular",
+  api_token: "dummy2",
 }
 
 project_params_3 = %Data.Project{
   name: "Appendix",
   tags: ["elixir", "open source", "blog"],
   url: "https://github.com/elixirschool/appendix",
+  api_token: "dummy3",
 }
 
 {:ok, elixir_school}   = Data.Repo.insert(project_params_1)
