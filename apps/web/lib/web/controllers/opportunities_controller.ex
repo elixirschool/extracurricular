@@ -33,7 +33,7 @@ defmodule Web.OpportunitiesController do
   end
 
   defp format_opportunity(opportunity) do
-    project = Map.take(opportunity.project, [:name, :id, :tags])
+    project = Map.take(opportunity.project, [:name, :id, :tags, :url])
 
     opportunity
     |> Map.take([:level, :id, :title, :url])
