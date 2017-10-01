@@ -14,10 +14,6 @@ const toggleLevels = function(levels, level) {
 export default class Filters extends React.Component {
   constructor(props) {
     super(props);
-    this.toggleStarter = this.toggleStarter.bind(this);
-    this.toggleIntermediate = this.toggleIntermediate.bind(this);
-    this.toggleAdvanced = this.toggleAdvanced.bind(this);
-    this.toggleLevel = this.toggleLevel.bind(this);
   }
   badgeCSS(level) {
     if (this.props.filters.levels.includes(level)) {
@@ -27,19 +23,19 @@ export default class Filters extends React.Component {
     }
   }
 
-  toggleStarter() {
+  toggleStarter = () => {
     this.toggleLevel(1);
   }
 
-  toggleIntermediate() {
+  toggleIntermediate = () => {
     this.toggleLevel(5);
   }
 
-  toggleAdvanced() {
+  toggleAdvanced = () => {
     this.toggleLevel(9);
   }
 
-  toggleLevel(level) {
+  toggleLevel = (level) => {
     const levels = this.props.filters.levels;
 
     if (levels.includes(level)) {

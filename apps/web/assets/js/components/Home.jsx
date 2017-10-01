@@ -13,28 +13,24 @@ export default class Home extends React.Component {
         levels: [1, 5, 9],
       },
     };
-
-    this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
-  handleFilterChange(filters) {
+  handleFilterChange = filters => {
     this.setState(prevState => ({
       filters: filters,
     }));
-  }
+  };
 
   render() {
     return (
       <div>
-        <div>
-          <Header />
-          <Filters
-            filters={this.state.filters}
-            updateFilters={this.handleFilterChange}
-          />
-          <List filters={this.state.filters} />
-          <Footer />
-        </div>
+        <Header />
+        <Filters
+          filters={this.state.filters}
+          updateFilters={this.handleFilterChange}
+        />
+        <List filters={this.state.filters} />
+        <Footer />
       </div>
     );
   }
