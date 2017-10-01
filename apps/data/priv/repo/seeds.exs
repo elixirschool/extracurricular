@@ -32,7 +32,7 @@ project_params_3 = %Data.Project{
 }
 
 {:ok, elixir_school}   = Data.Repo.insert(project_params_1)
-{:ok, extracirricular} = Data.Repo.insert(project_params_2)
+{:ok, extracurricular} = Data.Repo.insert(project_params_2)
 {:ok, appendix}        = Data.Repo.insert(project_params_3)
 
 opportunties =
@@ -54,8 +54,8 @@ opportunties =
   }, %Data.Opportunity{
     title: "Implement API for sorting",
     level: 5,
-    url: "https://github.com/elixirschool/extracirricular/issues/1",
-    project_id: extracirricular.id
+    url: "https://github.com/elixirschool/extracurricular/issues/1",
+    project_id: extracurricular.id
   }, %Data.Opportunity{
     title: "Fix grammar in Basic lesssons",
     level: 1,
@@ -64,8 +64,8 @@ opportunties =
   }, %Data.Opportunity{
     title: "Support JSON API for controller responses",
     level: 9,
-    url: "https://github.com/elixirschool/extracirricular/issues/1",
-    project_id: extracirricular.id
+    url: "https://github.com/elixirschool/extracurricular/issues/1",
+    project_id: extracurricular.id
   }, %Data.Opportunity{
     title: "Add new lesson on Registry",
     level: 5,
