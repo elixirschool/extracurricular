@@ -1,38 +1,13 @@
-import React from 'react'
-import Header from './Header'
-import Footer from './Footer'
-import Filters from './Filters'
-import List from './List'
+import React from 'react';
+import Home from './Home';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 export default class App extends React.Component {
-  constructor(props){
-    super(props)
-
-    this.state = {
-      filters: {
-        levels: [1, 5, 9]
-      }
-    }
-
-    this.handleFilterChange = this.handleFilterChange.bind(this)
-  }
-
-  handleFilterChange(filters) {
-    this.setState(prevState => ({
-      filters: filters
-    }));
-  }
-
   render() {
     return (
-      <div>
-        <Header />
-        <Filters 
-          filters={this.state.filters} 
-          updateFilters={this.handleFilterChange} />
-        <List filters={this.state.filters} />
-        <Footer />
-      </div>
+      <Router>
+        <Route to="/" exact={true} component={Home} />
+      </Router>
     );
   }
 }
