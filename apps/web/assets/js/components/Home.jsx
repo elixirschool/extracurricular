@@ -10,7 +10,7 @@ export default class Home extends React.Component {
 
     this.state = {
       filters: {
-        levels: [1, 5, 9],
+        levels: [],
       },
     };
   }
