@@ -1,15 +1,14 @@
 import React from 'react';
 
-const toggleLevels = function(levels, level) {
+const updateLevels = (levels, level) => {
   if (levels.includes(level)) {
-    const index = levels.indexOf(level);
-    levels.splice(index, 1);
-  } else {
-    levels.push(level);
+    // If the selected level is already present, filter it out and return the new array
+    return levels.filter(v => v !== level);
   }
 
-  return levels;
-};
+  // Otherwise, concat the new level on to the old ones
+  return [...levels, level];
+}
 
 export default class Filters extends React.Component {
   constructor(props) {
@@ -35,18 +34,16 @@ export default class Filters extends React.Component {
     this.toggleLevel(9);
   }
 
-  toggleLevel = (level) => {
-    const levels = this.props.filters.levels;
+  toggleLevel(level) {
+    const filters = this.props.filters;
+    // Create a new filters object by merging the levels array into the rest of the filters
+    const newFilters = Object.assign(
+      {},
+      filters,
+      { levels: updateLevels(filters.levels, level) }
+    );
 
-    if (levels.includes(level)) {
-      const index = levels.indexOf(level);
-      levels.splice(index, 1);
-    } else {
-      levels.push(level);
-    }
-
-    this.props.filters.levels = levels;
-    this.props.updateFilters(this.props.filters);
+    this.props.updateFilters(newFilters);
   }
 
   render() {
