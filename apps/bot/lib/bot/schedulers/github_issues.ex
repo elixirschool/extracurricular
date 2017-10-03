@@ -12,6 +12,7 @@ defmodule Bot.Scheduler.GitHubIssues do
   @projects_per_check 5
   @two_hours 7_200 # seconds
   @thirty_seconds 30_000 # milliseconds
+  @twelve_hours @two_hours * 6_000 # milliseconds
 
   def check_repo(%{id: project_id, url: url}) do
      url
@@ -34,8 +35,17 @@ defmodule Bot.Scheduler.GitHubIssues do
     {:noreply, new_state}
   end
 
+  def handle_info(:project_database_sync, state) do
+    new_state = Map.merge(state, init_state())
+
+    Process.send_after(self(), :project_database_sync, @twelve_hours)
+
+   {:noreply, new_state}
+  end
+
   def init(_opts) do
     Process.send_after(self(), :checks, @thirty_seconds)
+    Process.send_after(self(), :project_database_sync, @twelve_hours)
 
     {:ok, init_state()}
   end
