@@ -28,7 +28,7 @@ $ mix ecto.setup
 Install node packages and build brunch assets:
 
 ```bash
-$ cd apps/web/assets && npm install && node node node_modules/brunch/bin/brunch build && cd ../../../
+$ cd apps/web/assets && npm install && node node_modules/brunch/bin/brunch build && cd ../../../
 ```
 
 And the fun part, running the server!  If you haven't done so already, this will compile your frontend dependencies:
