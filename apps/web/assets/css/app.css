@@ -47,6 +47,18 @@ a {
   }
 }
 
+/* NAVBAR */
+
+.navbar {
+  margin: 15px;
+  text-align: right;
+}
+
+.navbar__signin {
+  margin: 10px;
+  font-size: 15px;
+}
+
 /* FOOTER */
 .footer {
   margin: 30px;

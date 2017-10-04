@@ -40,9 +40,11 @@ defmodule Web.Mixfile do
       {:cowboy, "~> 1.0"},
       {:data, in_umbrella: true},
       {:gettext, "~> 0.11"},
+      {:guardian, "~> 1.0.0-beta.1"},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_ecto, "~> 3.2"},
-      {:phoenix_html, "~> 2.10"}
+      {:phoenix_html, "~> 2.10"},
+      {:ueberauth, "~> 0.4.0"},
     ]
   end
 end

@@ -19,6 +19,9 @@ defmodule Web.Router do
     pipe_through(:browser)
 
     get("/", PageController, :index)
+    get "/auth/github", AuthController, :request
+    get "/auth/:provider/callback", AuthController, :callback
+    post "/auth/:provider/callback", AuthController, :callback
   end
 
   scope "/", Web do

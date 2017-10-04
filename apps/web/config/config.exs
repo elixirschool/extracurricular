@@ -26,4 +26,17 @@ config :logger, :console,
 config :web, :generators,
   context_app: false
 
+config :web, Web.AuthAccessPipeline,
+  module: Web.Guardian,
+  error_handler: Web.ErrorHandler
+
+config :ueberauth, Ueberauth,
+  providers: [
+    github: {Ueberauth.Strategy.Github, [default_scope: "admin:repo_hook,public_repo,user:email"]}
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Github.OAuth,
+  client_id: System.get_env("GITHUB_CLIENT_ID"),
+  client_secret: System.get_env("GITHUB_CLIENT_SECRET")
+
 import_config "#{Mix.env}.exs"
