@@ -9,7 +9,7 @@ Elixir School's Extracurricular is a website and twitter bot intended to increas
 
 ## Running the Project
 
-Once you have cloned the repo and `cd`'d in, its quite simple to get started.
+Once you have cloned the repo and `cd`'d in, it's quite simple to get started.
 First, we get our dependencies and compile everything:
 
 ```bash
