@@ -33,25 +33,33 @@ defmodule Bot.GitHubTest do
 
   test "does not retreive pull requests for a repo", %{bypass: bypass} do
     Bypass.expect(bypass, &request2/1)
-    issues = GitHub.issues("another/project")
+    issues = GitHub.issues("another/project", 1)
     assert length(issues) == 1
-    assert ["one"] == Enum.map(issues, &(&1["title"]))
+    assert ["two"] == Enum.map(issues, &(&1["title"]))
   end
 
   defp request2(%{query_string: "assignee=none&state=open&page=1"} = conn) do
-    link = "https://localhost:1234/repo/another/project/issues?assignee=none&state=open&page=1>; rel=\"next\""
+    link = "https://localhost:1234/repo/another/project/issues?assignee=none&state=open&page=2>; rel=\"next\""
 
     conn
     |> Plug.Conn.put_resp_header("Link", link)
-    |> Plug.Conn.resp(200, Poison.encode!([%{title: "one"}]))
+    |> Plug.Conn.resp(200, Poison.encode!([%{title: "one", pull_request: "something"}]))
   end
 
   defp request2(%{query_string: "assignee=none&state=open&page=2"} = conn) do
+    link = "https://localhost:1234/repo/another/project/issues?assignee=none&state=open&page=3>; rel=\"next\""
+
+    conn
+    |> Plug.Conn.put_resp_header("Link", link)
+    |> Plug.Conn.resp(200, Poison.encode!([%{title: "two"}]))
+  end
+
+  defp request2(%{query_string: "assignee=none&state=open&page=3"} = conn) do
     link = "https://localhost:1234/repo/another/project/issues?assignee=none&state=open&page=1>; rel=\"next\""
 
     conn
     |> Plug.Conn.put_resp_header("Link", link)
-    |> Plug.Conn.resp(200, Poison.encode!([%{title: "two", pull_request: "something"}]))
+    |> Plug.Conn.resp(200, Poison.encode!([%{title: "three", pull_request: "something"}]))
   end
 
 end
