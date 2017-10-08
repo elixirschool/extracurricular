@@ -11,12 +11,17 @@ defmodule Bot.GitHub do
       "/repos/#{repo}/issues?assignee=none&state=open&page=#{page}"
       |> GitHub.get
       |> response
+      |> filter_out_pull_requests()
 
     if next_page_number <= page do
-      Enum.filter(body, &(!Map.has_key?(&1, "pull_request")))
+      body
     else
       body ++ issues(repo, next_page_number)
     end
+  end
+
+  defp filter_out_pull_requests({body, next_page_number}) do
+    {Enum.filter(body, &(!Map.has_key?(&1, "pull_request"))), next_page_number}
   end
 
   defp next_page(headers) do
