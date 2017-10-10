@@ -9,7 +9,7 @@ defmodule Web.OpportunitiesController do
       params
       |> index_filters
       |> sort_by(params)
-      |> Opportunities.all
+      |> Opportunities.all()
 
     conn
     |> put_resp_content_type("application/json")
@@ -41,6 +41,7 @@ defmodule Web.OpportunitiesController do
   end
 
   defp level(%{"levels" => ""}), do: [1, 5, 9]
+
   defp level(params) do
     params
     |> Map.get("levels", "1,5,9")
@@ -61,5 +62,6 @@ defmodule Web.OpportunitiesController do
   defp sort_by(filters, %{"sort_by" => sort_by}) when sort_by in @allowed_sorts do
     Map.put(filters, :sort_by, String.to_atom(sort_by))
   end
+
   defp sort_by(filters, _params), do: filters
 end

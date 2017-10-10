@@ -25,7 +25,7 @@ defmodule Data.Opportunities do
 
     %Opportunity{}
     |> Opportunity.changeset(params)
-    |> Repo.insert
+    |> Repo.insert()
   end
 
   def insert_or_update(%{"url" => url} = params) do
@@ -46,15 +46,18 @@ defmodule Data.Opportunities do
 
     struct
     |> Opportunity.changeset(params)
-    |> Repo.update
+    |> Repo.update()
   end
 
-  defp filter({field, value}, query) when is_list(value), do: where(query, [o], field(o, ^field) in ^value)
+  defp filter({field, value}, query) when is_list(value),
+    do: where(query, [o], field(o, ^field) in ^value)
+
   defp filter({field, value}, query), do: where(query, [o], field(o, ^field) == ^value)
 
   defp filters(query, filters), do: Enum.reduce(filters, query, &filter/2)
 
   defp include(results, nil), do: results
+
   defp include(%{entries: entries} = results, schemas) do
     preloaded = Repo.preload(entries, schemas)
     Map.put(results, :entries, preloaded)
@@ -63,9 +66,12 @@ defmodule Data.Opportunities do
   defp level_mapping, do: Application.get_env(:data, :level_label_mapping)
 
   defp map_from_labels([], _mapping), do: nil
+
   defp map_from_labels(labels, mapping) do
-    labels = Enum.map(labels, &(&1 |> Map.get("name") |> String.downcase))
-    mapping = Enum.find(mapping, fn {_, mappings} -> length(mappings -- (mappings -- labels)) != 0 end)
+    labels = Enum.map(labels, &(&1 |> Map.get("name") |> String.downcase()))
+
+    mapping =
+      Enum.find(mapping, fn {_, mappings} -> length(mappings -- mappings -- labels) != 0 end)
 
     case mapping do
       {level, _} -> level

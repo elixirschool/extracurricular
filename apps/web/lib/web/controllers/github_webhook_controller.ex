@@ -7,11 +7,10 @@ defmodule Web.GitHubWebhookController do
 
   alias Data.{Opportunities, Projects}
 
-  plug :authorize
+  plug(:authorize)
 
   def create(conn, %{"action" => action, "issue" => issue} = issue_event)
-    when is_map(issue) and action in ["closed", "labeled", "opened", "reopened"] do
-
+      when is_map(issue) and action in ["closed", "labeled", "opened", "reopened"] do
     process_issue(issue_event)
 
     thank_you(conn)
@@ -23,11 +22,13 @@ defmodule Web.GitHubWebhookController do
 
   def process_issue(%{"issue" => issue, "repository" => %{"html_url" => url, "name" => name}}) do
     case Projects.get(%{url: url}) do
-      nil -> Logger.warn("Received issue payload for untracked project: #{name} #{url}")
+      nil ->
+        Logger.warn("Received issue payload for untracked project: #{name} #{url}")
+
       project ->
         issue
         |> attributes(project)
-        |> Opportunities.insert_or_update
+        |> Opportunities.insert_or_update()
     end
   end
 
@@ -52,7 +53,7 @@ defmodule Web.GitHubWebhookController do
   defp handle_request(_project, conn), do: conn
 
   defp project_for_token([]), do: nil
-  defp project_for_token([api_token|_]), do: Projects.get(%{api_token: api_token})
+  defp project_for_token([api_token | _]), do: Projects.get(%{api_token: api_token})
 
   defp thank_you(conn) do
     conn
