@@ -17,7 +17,7 @@ defmodule Data.Projects do
   def insert(params) do
     %Project{}
     |> Project.changeset(params)
-    |> Repo.insert
+    |> Repo.insert()
   end
 
   def update(id, params) when is_integer(id) do
@@ -29,6 +29,6 @@ defmodule Data.Projects do
   def update(struct, params) do
     struct
     |> Project.changeset(params)
-    |> Repo.update
+    |> Repo.update()
   end
 end

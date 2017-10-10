@@ -12,13 +12,13 @@ defmodule Data.Opportunity do
   @acceptable_types ["bug", "documentation", "enhancement", "feature"]
 
   schema "opportunities" do
-    field :closed_at, :utc_datetime
-    field :level, :integer
-    field :title, :string
-    field :type, :string
-    field :url, :string
+    field(:closed_at, :utc_datetime)
+    field(:level, :integer)
+    field(:title, :string)
+    field(:type, :string)
+    field(:url, :string)
 
-    belongs_to :project, Project
+    belongs_to(:project, Project)
 
     timestamps()
   end

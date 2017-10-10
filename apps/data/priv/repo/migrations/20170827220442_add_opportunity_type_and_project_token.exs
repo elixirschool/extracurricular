@@ -7,7 +7,7 @@ defmodule Data.Repo.Migrations.AddOpportunityTypeAndProjectToken do
     end
 
     alter table(:projects) do
-      add :api_token, :string, null: false
+      add :api_token, :string
     end
 
     create unique_index(:projects, [:api_token])

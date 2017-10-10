@@ -10,7 +10,9 @@ defmodule Web.Locale do
 
   def call(conn, _opts) do
     case conn.params["locale"] || get_session(conn, :locale) do
-      nil -> conn
+      nil ->
+        conn
+
       locale ->
         Gettext.put_locale(Web.Gettext, locale)
         put_session(conn, :locale, locale)

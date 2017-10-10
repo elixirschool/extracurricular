@@ -8,18 +8,22 @@ defmodule Bot.Scheduler.GitHubIssues do
   alias Bot.GitHub
   alias Data.{Opportunities, Projects, TaskSupervisor}
 
-  @five_minutes 300_000 # milliseconds
+  # milliseconds
+  @five_minutes 300_000
   @projects_per_check 5
-  @two_hours 7_200 # seconds
-  @thirty_seconds 30_000 # milliseconds
-  @twelve_hours @two_hours * 6_000 # milliseconds
+  # seconds
+  @two_hours 7200
+  # milliseconds
+  @thirty_seconds 30000
+  # milliseconds
+  @twelve_hours @two_hours * 6000
 
   def check_repo(%{id: project_id, url: url}) do
-     url
-     |> repo
-     |> GitHub.issues
-     |> Enum.map(&Map.put(&1, "project_id", project_id))
-     |> Enum.each(&insert_or_update/1)
+    url
+    |> repo
+    |> GitHub.issues()
+    |> Enum.map(&Map.put(&1, "project_id", project_id))
+    |> Enum.each(&insert_or_update/1)
   end
 
   def handle_info(:checks, state) do
@@ -40,7 +44,7 @@ defmodule Bot.Scheduler.GitHubIssues do
 
     Process.send_after(self(), :project_database_sync, @twelve_hours)
 
-   {:noreply, new_state}
+    {:noreply, new_state}
   end
 
   def init(_opts) do
@@ -63,7 +67,7 @@ defmodule Bot.Scheduler.GitHubIssues do
   defp insert_or_update(%{"html_url" => html_url} = issue) do
     issue
     |> Map.put("url", html_url)
-    |> Opportunities.insert_or_update
+    |> Opportunities.insert_or_update()
   end
 
   defp now, do: DateTime.to_unix(DateTime.utc_now())
@@ -72,7 +76,7 @@ defmodule Bot.Scheduler.GitHubIssues do
 
   defp project_state(%{id: id} = project), do: {id, Map.put(project, :last_check, random_time())}
 
-  defp random_time, do: now() + Enum.random(1..3_600)
+  defp random_time, do: now() + Enum.random(1..3600)
 
   defp repo("https://github.com/" <> slug), do: slug
 
@@ -85,6 +89,6 @@ defmodule Bot.Scheduler.GitHubIssues do
   defp update_check_times(recently_checked, state) do
     recently_checked
     |> Enum.map(&Map.put(&1, :last_check, now()))
-    |> Enum.reduce(state, fn (%{id: id} = project, acc) -> Map.put(acc, id, project) end)
+    |> Enum.reduce(state, fn %{id: id} = project, acc -> Map.put(acc, id, project) end)
   end
 end

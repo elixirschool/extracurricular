@@ -9,7 +9,7 @@ defmodule Bot.GitHub do
   def issues(repo, page \\ 1) do
     {body, next_page_number} =
       "/repos/#{repo}/issues?assignee=none&state=open&page=#{page}"
-      |> GitHub.get
+      |> GitHub.get()
       |> response
       |> filter_out_pull_requests()
 
@@ -31,6 +31,7 @@ defmodule Bot.GitHub do
   end
 
   def parse_link_header(nil), do: 1
+
   def parse_link_header({"Link", links}) do
     case Regex.run(~r/page=(\d+)>; rel="next"/, links) do
       [_match, page] -> String.to_integer(page)

@@ -16,20 +16,17 @@ defmodule Bot.Client.GitHub do
   def process_url(url), do: api_url() <> url
 
   def request(method, url, headers, body, options) do
-    transaction = Appsignal.Transaction.start(
-      Appsignal.Transaction.generate_id,
-      :background_task
-    )
+    transaction =
+      Appsignal.Transaction.start(Appsignal.Transaction.generate_id(), :background_task)
 
     transaction
     |> Appsignal.Transaction.set_action("GitHub/request")
-    |> Appsignal.Transaction.set_sample_data(
-      "environment", %{request_path: url}
-    )
+    |> Appsignal.Transaction.set_sample_data("environment", %{request_path: url})
 
-    result = instrument(transaction, "github.request_api", "Requesting GitHub API", fn() ->
-      super(method, url, headers, body, options)
-    end)
+    result =
+      instrument(transaction, "github.request_api", "Requesting GitHub API", fn ->
+        super(method, url, headers, body, options)
+      end)
 
     Appsignal.Transaction.finish(transaction)
     :ok = Appsignal.Transaction.complete(transaction)
