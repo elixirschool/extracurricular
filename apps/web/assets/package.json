@@ -11,6 +11,7 @@
     "watch": "brunch watch --stdin"
   },
   "dependencies": {
+    "query-string": "^5.0.0",
     "react": "^15.4",
     "react-dom": "^15.4",
     "react-paginate": "^4.4.4",
