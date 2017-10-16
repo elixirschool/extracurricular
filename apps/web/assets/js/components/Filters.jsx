@@ -14,6 +14,7 @@ export default class Filters extends React.Component {
   constructor(props) {
     super(props);
   }
+
   badgeCSS(level) {
     if (this.props.filters.levels.includes(level)) {
       return `badge--${level}`;
@@ -37,12 +38,15 @@ export default class Filters extends React.Component {
   toggleLevel(level) {
     const filters = this.props.filters;
     // Create a new filters object by merging the levels array into the rest of the filters
+    const updatedLevels = updateLevels(filters.levels, level);
     const newFilters = Object.assign(
       {},
       filters,
-      { levels: updateLevels(filters.levels, level) }
+      { levels: updatedLevels }
     );
 
+    const newURL = updatedLevels.length ? `/?levels=${updatedLevels}` : '/' ;
+    this.props.updateURL(newURL);
     this.props.updateFilters(newFilters);
   }
 
