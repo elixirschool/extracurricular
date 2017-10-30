@@ -255,6 +255,7 @@ a {
 }
 
 .pagination li {
+  cursor: pointer;
   /* screen readers only */
   left: -9999px;
   position: absolute;
