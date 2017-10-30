@@ -15,7 +15,7 @@ const translated_difficulty = level => {
 
 export default class Opportunity extends React.Component {
   render() {
-    const { level, title, project, url } = this.props.data;
+    const { level, title, project, type, url } = this.props.data;
 
     return (
       <li className="list__item">
@@ -33,6 +33,7 @@ export default class Opportunity extends React.Component {
             <span className={`badge badge--${level} u-text-lower`}>
               {translated_difficulty(level)}
             </span>
+            {type && <span className="badge u-text-lower">{type}</span>}
             {project.tags.map(tag => (
               <span key={`${project.id}-${tag}`} className="badge">
                 <svg className="badge__icon">
