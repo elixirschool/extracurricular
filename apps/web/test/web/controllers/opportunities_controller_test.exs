@@ -10,6 +10,7 @@ defmodule Web.OpportunitiesControllerTest do
       level: 1,
       project_id: project_id,
       title: "Example Opportunity",
+      type: "feature",
       url: "https://example.com/tracker/1"
     })
 
@@ -22,6 +23,7 @@ defmodule Web.OpportunitiesControllerTest do
       %{"level"   => 1,
         "project" => %{"id" => ^project_id},
         "title"   => "Example Opportunity",
+        "type"    => "feature",
         "url"     => "https://example.com/tracker/1"}]} = json_response(conn, 200)
   end
 

@@ -36,7 +36,7 @@ defmodule Web.OpportunitiesController do
     project = Map.take(opportunity.project, [:name, :id, :tags, :url])
 
     opportunity
-    |> Map.take([:level, :id, :title, :url])
+    |> Map.take([:level, :id, :title, :type, :url])
     |> Map.merge(%{project: project})
   end
 
