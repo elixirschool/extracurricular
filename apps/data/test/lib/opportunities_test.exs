@@ -16,6 +16,11 @@ defmodule Data.OpportunitiesTest do
     assert {:ok, %{id: _id}} = Opportunities.insert(attributes)
   end
 
+  test "duplicate opportunity urls are invalid" do
+    insert(:opportunity, url: "https://example.com")
+    assert {:error, _changeset} = Opportunities.insert(%{url: "http://example.com"})
+  end
+
   test "gets opportunity by attributes" do
     %{url: url} = insert(:opportunity)
     assert %{id: _id} = Opportunities.get(%{url: url})

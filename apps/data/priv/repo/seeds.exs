@@ -44,32 +44,32 @@ opportunties =
   }, %Data.Opportunity{
     title: "Translate to pig latin",
     level: 1,
-    url: "https://github.com/elixirschool/elixirschool/issues/1",
+    url: "https://github.com/elixirschool/elixirschool/issues/2",
     project_id: elixir_school.id
   }, %Data.Opportunity{
     title: "Pipelines in Elixir",
     level: 1,
-    url: "https://github.com/elixirschool/appendix/issues/1",
+    url: "https://github.com/elixirschool/appendix/issues/3",
     project_id: appendix.id
   }, %Data.Opportunity{
     title: "Implement API for sorting",
     level: 5,
-    url: "https://github.com/elixirschool/extracurricular/issues/1",
+    url: "https://github.com/elixirschool/extracurricular/issues/4",
     project_id: extracurricular.id
   }, %Data.Opportunity{
     title: "Fix grammar in Basic lesssons",
     level: 1,
-    url: "https://github.com/elixirschool/elixirschool/issues/1",
+    url: "https://github.com/elixirschool/elixirschool/issues/5",
     project_id: elixir_school.id
   }, %Data.Opportunity{
     title: "Support JSON API for controller responses",
     level: 9,
-    url: "https://github.com/elixirschool/extracurricular/issues/1",
+    url: "https://github.com/elixirschool/extracurricular/issues/6",
     project_id: extracurricular.id
   }, %Data.Opportunity{
     title: "Add new lesson on Registry",
     level: 5,
-    url: "https://github.com/elixirschool/elixirschool/issues/1",
+    url: "https://github.com/elixirschool/elixirschool/issues/7",
     project_id: elixir_school.id
   }]
 

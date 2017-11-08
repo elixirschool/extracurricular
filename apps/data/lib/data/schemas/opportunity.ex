@@ -29,6 +29,7 @@ defmodule Data.Opportunity do
     |> validate_required([:level, :title, :url])
     |> validate_inclusion(:level, @acceptable_levels)
     |> validate_inclusion(:type, @acceptable_types)
+    |> unique_constraint(:url, message: "An opportunity with this URL already exists", name: "opportunity_url_index")
     |> assoc_constraint(:project)
   end
 end
