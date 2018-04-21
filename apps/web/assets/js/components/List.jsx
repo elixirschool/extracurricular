@@ -30,6 +30,7 @@ export default class List extends React.Component {
     .then(res => res.json())
     .then(json => { 
       this.setState(prevState => json)
+      window.scrollTo(0, 0)
     })
   }
 
