@@ -5,6 +5,9 @@
 [license-img]: http://img.shields.io/badge/license-MIT-brightgreen.svg
 [license]: http://opensource.org/licenses/MIT
 
+**We've decided to put Extracurricular on hold because interest just wasn't there.
+We may come back to it in the future once we've had a time to rethink our approach.**
+
 Elixir School's Extracurricular is a website and twitter bot intended to increase the visibility of open source opportunities within the community.
 
 ## Running the Project
